@@ -2173,7 +2173,7 @@ function sAllTokusei(){
 
 function setTokusei(){
 	v_name=tokusei.value
-	if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="かがくへんかガス"){
+	if(v_name=="ノーてんき" || v_name=="エアロック"){
 		if(sonotalist.value==""){
 			sonotalist.value=v_name;
 		}else{
@@ -2228,7 +2228,7 @@ function setTokusei(){
 
 function ssetTokusei(){
 	v_name=stokusei.value
-	if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="かがくへんかガス"){
+	if(v_name=="ノーてんき" || v_name=="エアロック"){
 		if(sonotalist.value==""){
 			sonotalist.value=v_name;
 		}else{
