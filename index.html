@@ -349,6 +349,7 @@
 			</td>
 			<td>
 				<select id="sonota">
+					<option value="">---</option>
 					<option value="てだすけ">てだすけ</option>
 					<option value="フレンドガード">フレンドガード</option>
 					<option value="フラワーギフト">フラワーギフト</option>
@@ -455,6 +456,7 @@
 			</td>
 			<td>
 				<select id="ssonota">
+					<option value="">---</option>
 					<option value="てだすけ">てだすけ</option>
 					<option value="フレンドガード">フレンドガード</option>
 					<option value="フラワーギフト">フラワーギフト</option>
@@ -1226,22 +1228,9 @@
 	sonota.oninput = function() {
 		v_name=sonota.value;
 		newArr=sonotalist.value;
-		if(newArr==""){
-			sonotalist.value=v_name;
-			if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
-				big=ssonotalist.value.split(",");
-				if(big.indexOf(v_name)==-1){
-					if(big[0]==""){
-						ssonotalist.value=v_name;
-					}else{
-						ssonotalist.value=ssonotalist.value+","+v_name;
-					}
-				}
-			}
-		}else{
-			big=newArr.split(",");
-			if(big.indexOf(v_name)==-1){
-				sonotalist.value=newArr+","+v_name;
+		if(v_name!=""){
+			if(newArr==""){
+				sonotalist.value=v_name;
 				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
 					big=ssonotalist.value.split(",");
 					if(big.indexOf(v_name)==-1){
@@ -1253,18 +1242,34 @@
 					}
 				}
 			}else{
-				big.splice(big.indexOf(v_name), 1 );
-				newArr=big.join(",");
-				sonotalist.value=newArr;
-				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
-					big=ssonotalist.value.split(",");
-					if(big.indexOf(v_name)!=-1){
-						big.splice(big.indexOf(v_name), 1 );
-						newArr=big.join(",");
-						ssonotalist.value=newArr;
+				big=newArr.split(",");
+				if(big.indexOf(v_name)==-1){
+					sonotalist.value=newArr+","+v_name;
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+						big=ssonotalist.value.split(",");
+						if(big.indexOf(v_name)==-1){
+							if(big[0]==""){
+								ssonotalist.value=v_name;
+							}else{
+								ssonotalist.value=ssonotalist.value+","+v_name;
+							}
+						}
+					}
+				}else{
+					big.splice(big.indexOf(v_name), 1 );
+					newArr=big.join(",");
+					sonotalist.value=newArr;
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+						big=ssonotalist.value.split(",");
+						if(big.indexOf(v_name)!=-1){
+							big.splice(big.indexOf(v_name), 1 );
+							newArr=big.join(",");
+							ssonotalist.value=newArr;
+						}
 					}
 				}
 			}
+			sonota.value="";
 		}
 	}
 	function kuria(){
@@ -1274,22 +1279,9 @@
 	ssonota.oninput = function() {
 		v_name=ssonota.value;
 		newArr=ssonotalist.value;
-		if(newArr==""){
-			ssonotalist.value=v_name;
-			if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
-				big=sonotalist.value.split(",");
-				if(big.indexOf(v_name)==-1){
-					if(big[0]==""){
-						sonotalist.value=v_name;
-					}else{
-						sonotalist.value=sonotalist.value+","+v_name;
-					}
-				}
-			}
-		}else{
-			big=newArr.split(",");
-			if(big.indexOf(v_name)==-1){
-				ssonotalist.value=newArr+","+v_name;
+		if(v_name!=""){
+			if(newArr==""){
+				ssonotalist.value=v_name;
 				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
 					big=sonotalist.value.split(",");
 					if(big.indexOf(v_name)==-1){
@@ -1301,18 +1293,34 @@
 					}
 				}
 			}else{
-				big.splice(big.indexOf(v_name), 1 );
-				newArr=big.join(",");
-				ssonotalist.value=newArr;
-				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
-					big=sonotalist.value.split(",");
-					if(big.indexOf(v_name)!=-1){
-						big.splice(big.indexOf(v_name), 1 );
-						newArr=big.join(",");
-						sonotalist.value=newArr;
+				big=newArr.split(",");
+				if(big.indexOf(v_name)==-1){
+					ssonotalist.value=newArr+","+v_name;
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+						big=sonotalist.value.split(",");
+						if(big.indexOf(v_name)==-1){
+							if(big[0]==""){
+								sonotalist.value=v_name;
+							}else{
+								sonotalist.value=sonotalist.value+","+v_name;
+							}
+						}
+					}
+				}else{
+					big.splice(big.indexOf(v_name), 1 );
+					newArr=big.join(",");
+					ssonotalist.value=newArr;
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+						big=sonotalist.value.split(",");
+						if(big.indexOf(v_name)!=-1){
+							big.splice(big.indexOf(v_name), 1 );
+							newArr=big.join(",");
+							sonotalist.value=newArr;
+						}
 					}
 				}
 			}
+			ssonota.value="";
 		}
 	}
 	function skuria(){
