@@ -23,9 +23,10 @@
 		width: 40vw;
 		height:20vh;
 		z-index: 1;
+		left:30vw;
 	}
 	
-		.spopup {
+	.spopup {
 		display: none;
 		position: absolute;
 		background-color: #f9f9f9;
@@ -34,6 +35,8 @@
 		width: 40vw;
 		height:20vh;
 		z-index: 1;
+		bottom:0vh;
+		left:30vw;
 	}
 
 </style>
@@ -392,20 +395,17 @@
 			</td>
 			<td width="100">
 				<img src="down.png" alt="down" width="70" height="230" onclick="showPopup()"/>
-				
 				<div class="popup">
-					
-						<canvas id="myChart"></canvas>
-					
+					<canvas id="myChart"></canvas>
 					<input type="checkbox" id="kyuusyo" name="kyuusyo"/><label for="kyuusyo">急所</label>
 				</div>
 			</td>
 			<td width="100">
-				<img src="up.png" alt="up" width="70" height="230" onclick="sshowPopup()"/>
 				<div class="spopup">
 					<canvas id="smyChart"></canvas>
 					<input type="checkbox" id="skyuusyo" name="skyuusyo"/><label for="skyuusyo">急所</label>
 				</div>
+				<img src="up.png" alt="up" width="70" height="230" onclick="sshowPopup()"/>
 			</td>
 			<td width="250">
 				<p>テラス</br>
