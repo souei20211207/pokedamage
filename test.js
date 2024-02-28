@@ -2280,3 +2280,50 @@ function ssetTokusei(){
 		}
 	}
 }
+
+function tokusub(){
+	v_name=tokusei.value;
+	if(v_name=="とうそうしん"){
+		tokuseisub.innerHTML='<select id="tokuseisubc"><option value="同性">同性</option><option value="異性">異性</option><option value="性別なし">性別なし</option></select>';
+		tokuseisubc= document.getElementById('tokuseisubc');
+	}else if(v_name=="もうか" || v_name=="しんりょく" || v_name=="げきりゅう" || v_name=="アナライズ" || v_name=="スロースタート" || v_name=="むしのしらせ" || v_name=="もらいび" || v_name=="プラス" || v_name=="マイナス"){
+		tokuseisub.innerHTML='<input type="checkbox" id="tokuseisubc" name="tokuseisubc"/><label for="tokuseisubc">'+v_name+'適用</label>';
+		tokuseisubc= document.getElementById('tokuseisubc');
+	}else if(v_name=="こだいかっせい" || v_name=="クォークチャージ"){
+		re='適用：<select id="tokuseisubc">';
+		re=re+'<option value="なし">なし</option>';
+		re=re+'<option value="こうげき">こうげき</option>';
+		re=re+'<option value="ぼうぎょ">ぼうぎょ</option>';
+		re=re+'<option value="とくこう">とくこう</option>';
+		re=re+'<option value="とくぼう">とくぼう</option>';
+		re=re+'<option value="すばやさ">すばやさ</option>';
+		re=re+'</select>';
+		tokuseisub.innerHTML=re;
+		tokuseisubc= document.getElementById('tokuseisubc');
+	}else{
+		tokuseisub.innerHTML="";
+	}
+}
+function stokusub(){
+	v_name=stokusei.value;
+	if(v_name=="とうそうしん"){
+		stokuseisub.innerHTML='<select id="stokuseisubc"><option value="同性">同性</option><option value="異性">異性</option><option value="性別なし">性別なし</option></select>';
+		stokuseisubc= document.getElementById('stokuseisubc');
+	}else if(v_name=="もうか" || v_name=="しんりょく" || v_name=="げきりゅう" || v_name=="アナライズ" || v_name=="スロースタート" || v_name=="むしのしらせ" || v_name=="もらいび" || v_name=="プラス" || v_name=="マイナス"){
+		stokuseisub.innerHTML='<input type="checkbox" id="stokuseisubc" name="stokuseisubc"/><label for="stokuseisubc">'+v_name+'適用</label>';
+		stokuseisubc= document.getElementById('stokuseisubc');
+	}else if(v_name=="こだいかっせい" || v_name=="クォークチャージ"){
+		re='適用：<select id="stokuseisubc">';
+		re=re+'<option value="なし">なし</option>';
+		re=re+'<option value="こうげき">こうげき</option>';
+		re=re+'<option value="ぼうぎょ">ぼうぎょ</option>';
+		re=re+'<option value="とくこう">とくこう</option>';
+		re=re+'<option value="とくぼう">とくぼう</option>';
+		re=re+'<option value="すばやさ">すばやさ</option>';
+		re=re+'</select>';
+		stokuseisub.innerHTML=re;
+		stokuseisubc= document.getElementById('stokuseisubc');
+	}else{
+		stokuseisub.innerHTML="";
+	}
+}
