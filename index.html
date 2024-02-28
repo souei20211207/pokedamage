@@ -62,11 +62,15 @@
 				<input type="checkbox" id="tmukou" name="tmukou"/><label for="tmukou">特性無効</label>
 			</td>
 		</tr>
-		<tr height="30px">
+		<tr>
 			<td colspan="2">
 				<input type="text" id="name" list="codeType" autocomplete="off"/>
 				<button type="button" onclick="syuzokuup()">種族値セット</button>
 			</td>
+			<td><div id="tokuseisub"></div></td>
+		</tr>
+		<tr height="30px">
+			<td colspan="2"></td>
 			<td>
 				持ち物：
 				<select id="motimono">
@@ -397,13 +401,13 @@
 				<img src="down.png" alt="down" width="70" height="230" onclick="showPopup()"/>
 				<div class="popup">
 					<canvas id="myChart"></canvas>
-					<input type="checkbox" id="kyuusyo" name="kyuusyo"/><label for="kyuusyo">急所</label>
+					<span style="background-color:#ffcc99"><input type="checkbox" id="kyuusyo" name="kyuusyo"/><label for="kyuusyo">急所</label></span>
 				</div>
 			</td>
 			<td width="100">
 				<div class="spopup">
 					<canvas id="smyChart"></canvas>
-					<input type="checkbox" id="skyuusyo" name="skyuusyo"/><label for="skyuusyo">急所</label>
+					<span style="background-color:#ffcc99"><input type="checkbox" id="skyuusyo" name="skyuusyo"/><label for="skyuusyo">急所</label></span>
 				</div>
 				<img src="up.png" alt="up" width="70" height="230" onclick="sshowPopup()"/>
 			</td>
@@ -501,11 +505,15 @@
 				<input type="checkbox" id="stmukou" name="stmukou"/><label for="stmukou">特性無効</label>
 			</td>
 		</tr>
-		<tr height="30px">
+		<tr>
 			<td colspan="2">
 				<input type="text" id="sname" list="scodeType" autocomplete="off"/>
 				<button type="button" onclick="ssyuzokuup()">種族値セット</button>
 			</td>
+			<td><div id="stokuseisub"></div></td>
+		</tr>
+		<tr height="30px">
+			<td colspan="2"></td>
 			<td>
 				持ち物：
 				<select id="smotimono">
@@ -925,6 +933,10 @@
 	var subuc;
 	let ssubu= document.getElementById('ssubu');
 	var ssubuc;
+	let tokuseisub= document.getElementById('tokuseisub');
+	var tokuseisubc;
+	let stokuseisub= document.getElementById('stokuseisub');
+	var stokuseisubc;
 	
 	var v_level;
 	var v_name;
@@ -1201,11 +1213,13 @@
 	function syuzokuup(){
 		v_name = name.value;
 		syuzoku(v_name)
+		tokusub()
 	}
 	
 	function ssyuzokuup(){
 		v_name = sname.value;
 		ssyuzoku(v_name)
+		stokusub()
 	}
 	
 	function kiero(){
@@ -1602,5 +1616,12 @@
     		document.querySelector(".spopup").style.display = "block";
     	}
     }
+    
+    tokusei.oninput = function() {
+		tokusub()
+	};
+	stokusei.oninput = function() {
+		stokusub()
+	};
 </script>
 </html>
