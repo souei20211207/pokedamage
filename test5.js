@@ -81,11 +81,23 @@ function dame(){
 	if(waza2_name=="アクロバット" && smotimono.value=="なし"){
 		iry4=2*iry4;
 	}
+	if(waza1_name=="ゆきなだれ"){
+		if(subuc.checked){
+			iry3=2*iry3;
+		}
+	}
+	if(waza2_name=="ゆきなだれ"){
+		if(ssubuc.checked){
+			iry4=2*iry4;
+		}
+	}
 	
 	//とうそうしん下降
-	if(tokusei.value=="とうそうしん"){
+	if(tokusei.value=="とうそうしん" && !tmukou.checked && tokuseisubc.value=="異性"){
+		iry=Math.round(3072*iry/syoki);
 	}
-	if(stokusei.value=="とうそうしん"){
+	if(stokusei.value=="とうそうしん" && !stmukou.checked && stokuseisubc.value=="異性"){
+		iry2=Math.round(3072*iry2/syoki);
 	}
 	
 	//スキン系
@@ -145,9 +157,11 @@ function dame(){
 	}
 	
 	//とうそうしん上昇
-	if(tokusei.value=="とうそうしん"){
+	if(tokusei.value=="とうそうしん" && !tmukou.checked && tokuseisubc.value=="同性"){
+		iry=Math.round(5120*iry/syoki);
 	}
-	if(stokusei.value=="とうそうしん"){
+	if(stokusei.value=="とうそうしん" && !stmukou.checked && stokuseisubc.value=="同性"){
+		iry2=Math.round(5120*iry2/syoki);
 	}
 	
 	//バッテリー
@@ -1064,6 +1078,14 @@ function dame(){
 	
 	var tai=4096;
 	var tai2=4096;
+	
+	if(key5s.indexOf("もりののろい")!=-1 && terasu.value=="なし"){
+		key2s.push("くさ")
+	}
+	if(key6s.indexOf("もりののろい")!=-1 && sterasu.value=="なし"){
+		key3s.push("くさ")
+	}
+	
 	if(key2s.indexOf(key1s[1])!=-1){
 		if(terasu.value==key1s[1]){
 			if(tokusei.value=="てきおうりょく" && !tmukou.checked){
@@ -1182,12 +1204,274 @@ function dame(){
 		}
 	}
 
+	v_a_ch=1;
+	v_b_ch=1;
+	v_c_ch=1;
+	v_d_ch=1;
+	v_s_ch=1;
+	if(r_a.value==-6){
+		v_a_ch=2/8;
+	}else if(r_a.value==-5){
+		v_a_ch=2/7;
+	}else if(r_a.value==-4){
+		v_a_ch=2/6;
+	}else if(r_a.value==-3){
+		v_a_ch=2/5;
+	}else if(r_a.value==-2){
+		v_a_ch=2/4;
+	}else if(r_a.value==-1){
+		v_a_ch=2/3;
+	}else if(r_a.value==1){
+		v_a_ch=3/2;
+	}else if(r_a.value==2){
+		v_a_ch=4/2;
+	}else if(r_a.value==3){
+		v_a_ch=5/2;
+	}else if(r_a.value==4){
+		v_a_ch=6/2;
+	}else if(r_a.value==5){
+		v_a_ch=7/2;
+	}else if(r_a.value==6){
+		v_a_ch=8/2;
+	}
+	if(r_b.value==-6){
+		v_b_ch=2/8;
+	}else if(r_b.value==-5){
+		v_b_ch=2/7;
+	}else if(r_b.value==-4){
+		v_b_ch=2/6;
+	}else if(r_b.value==-3){
+		v_b_ch=2/5;
+	}else if(r_b.value==-2){
+		v_b_ch=2/4;
+	}else if(r_b.value==-1){
+		v_b_ch=2/3;
+	}else if(r_b.value==1){
+		v_b_ch=3/2;
+	}else if(r_b.value==2){
+		v_b_ch=4/2;
+	}else if(r_b.value==3){
+		v_b_ch=5/2;
+	}else if(r_b.value==4){
+		v_b_ch=6/2;
+	}else if(r_b.value==5){
+		v_b_ch=7/2;
+	}else if(r_b.value==6){
+		v_b_ch=8/2;
+	}
+	if(r_c.value==-6){
+		v_c_ch=2/8;
+	}else if(r_c.value==-5){
+		v_c_ch=2/7;
+	}else if(r_c.value==-4){
+		v_c_ch=2/6;
+	}else if(r_c.value==-3){
+		v_c_ch=2/5;
+	}else if(r_c.value==-2){
+		v_c_ch=2/4;
+	}else if(r_c.value==-1){
+		v_c_ch=2/3;
+	}else if(r_c.value==1){
+		v_c_ch=3/2;
+	}else if(r_c.value==2){
+		v_c_ch=4/2;
+	}else if(r_c.value==3){
+		v_c_ch=5/2;
+	}else if(r_c.value==4){
+		v_c_ch=6/2;
+	}else if(r_c.value==5){
+		v_c_ch=7/2;
+	}else if(r_c.value==6){
+		v_c_ch=8/2;
+	}
+	if(r_d.value==-6){
+		v_d_ch=2/8;
+	}else if(r_d.value==-5){
+		v_d_ch=2/7;
+	}else if(r_d.value==-4){
+		v_d_ch=2/6;
+	}else if(r_d.value==-3){
+		v_d_ch=2/5;
+	}else if(r_d.value==-2){
+		v_d_ch=2/4;
+	}else if(r_d.value==-1){
+		v_d_ch=2/3;
+	}else if(r_d.value==1){
+		v_d_ch=3/2;
+	}else if(r_d.value==2){
+		v_d_ch=4/2;
+	}else if(r_d.value==3){
+		v_d_ch=5/2;
+	}else if(r_d.value==4){
+		v_d_ch=6/2;
+	}else if(r_d.value==5){
+		v_d_ch=7/2;
+	}else if(r_d.value==6){
+		v_d_ch=8/2;
+	}
+	if(r_s.value==-6){
+		v_s_ch=2/8;
+	}else if(r_s.value==-5){
+		v_s_ch=2/7;
+	}else if(r_s.value==-4){
+		v_s_ch=2/6;
+	}else if(r_s.value==-3){
+		v_s_ch=2/5;
+	}else if(r_s.value==-2){
+		v_s_ch=2/4;
+	}else if(r_s.value==-1){
+		v_s_ch=2/3;
+	}else if(r_s.value==1){
+		v_s_ch=3/2;
+	}else if(r_s.value==2){
+		v_s_ch=4/2;
+	}else if(r_s.value==3){
+		v_s_ch=5/2;
+	}else if(r_s.value==4){
+		v_s_ch=6/2;
+	}else if(r_s.value==5){
+		v_s_ch=7/2;
+	}else if(r_s.value==6){
+		v_s_ch=8/2;
+	}
+	
+	v_z_a=1;
+	v_z_b=1;
+	v_z_c=1;
+	v_z_d=1;
+	v_z_s=1;
+	if(sr_a.value==-6){
+		v_z_a=2/8;
+	}else if(sr_a.value==-5){
+		v_z_a=2/7;
+	}else if(sr_a.value==-4){
+		v_z_a=2/6;
+	}else if(sr_a.value==-3){
+		v_z_a=2/5;
+	}else if(sr_a.value==-2){
+		v_z_a=2/4;
+	}else if(sr_a.value==-1){
+		v_z_a=2/3;
+	}else if(sr_a.value==1){
+		v_z_a=3/2;
+	}else if(sr_a.value==2){
+		v_z_a=4/2;
+	}else if(sr_a.value==3){
+		v_z_a=5/2;
+	}else if(sr_a.value==4){
+		v_z_a=6/2;
+	}else if(sr_a.value==5){
+		v_z_a=7/2;
+	}else if(sr_a.value==6){
+		v_z_a=8/2;
+	}
+	if(sr_b.value==-6){
+		v_z_b=2/8;
+	}else if(sr_b.value==-5){
+		v_z_b=2/7;
+	}else if(sr_b.value==-4){
+		v_z_b=2/6;
+	}else if(sr_b.value==-3){
+		v_z_b=2/5;
+	}else if(sr_b.value==-2){
+		v_z_b=2/4;
+	}else if(sr_b.value==-1){
+		v_z_b=2/3;
+	}else if(sr_b.value==1){
+		v_z_b=3/2;
+	}else if(sr_b.value==2){
+		v_z_b=4/2;
+	}else if(sr_b.value==3){
+		v_z_b=5/2;
+	}else if(sr_b.value==4){
+		v_z_b=6/2;
+	}else if(sr_b.value==5){
+		v_z_b=7/2;
+	}else if(sr_b.value==6){
+		v_z_b=8/2;
+	}
+	if(sr_c.value==-6){
+		v_z_c=2/8;
+	}else if(sr_c.value==-5){
+		v_z_c=2/7;
+	}else if(sr_c.value==-4){
+		v_z_c=2/6;
+	}else if(sr_c.value==-3){
+		v_z_c=2/5;
+	}else if(sr_c.value==-2){
+		v_z_c=2/4;
+	}else if(sr_c.value==-1){
+		v_z_c=2/3;
+	}else if(sr_c.value==1){
+		v_z_c=3/2;
+	}else if(sr_c.value==2){
+		v_z_c=4/2;
+	}else if(sr_c.value==3){
+		v_z_c=5/2;
+	}else if(sr_c.value==4){
+		v_z_c=6/2;
+	}else if(sr_c.value==5){
+		v_z_c=7/2;
+	}else if(sr_c.value==6){
+		v_z_c=8/2;
+	}
+	if(sr_d.value==-6){
+		v_z_d=2/8;
+	}else if(sr_d.value==-5){
+		v_z_d=2/7;
+	}else if(sr_d.value==-4){
+		v_z_d=2/6;
+	}else if(sr_d.value==-3){
+		v_z_d=2/5;
+	}else if(sr_d.value==-2){
+		v_z_d=2/4;
+	}else if(sr_d.value==-1){
+		v_z_d=2/3;
+	}else if(sr_d.value==1){
+		v_z_d=3/2;
+	}else if(sr_d.value==2){
+		v_z_d=4/2;
+	}else if(sr_d.value==3){
+		v_z_d=5/2;
+	}else if(sr_d.value==4){
+		v_z_d=6/2;
+	}else if(sr_d.value==5){
+		v_z_d=7/2;
+	}else if(sr_d.value==6){
+		v_z_d=8/2;
+	}
+	if(sr_s.value==-6){
+		v_z_s=2/8;
+	}else if(sr_s.value==-5){
+		v_z_s=2/7;
+	}else if(sr_s.value==-4){
+		v_z_s=2/6;
+	}else if(sr_s.value==-3){
+		v_z_s=2/5;
+	}else if(sr_s.value==-2){
+		v_z_s=2/4;
+	}else if(sr_s.value==-1){
+		v_z_s=2/3;
+	}else if(sr_s.value==1){
+		v_z_s=3/2;
+	}else if(sr_s.value==2){
+		v_z_s=4/2;
+	}else if(sr_s.value==3){
+		v_z_s=5/2;
+	}else if(sr_s.value==4){
+		v_z_s=6/2;
+	}else if(sr_s.value==5){
+		v_z_s=7/2;
+	}else if(sr_s.value==6){
+		v_z_s=8/2;
+	}
+
 	if(key1s[2]=="物理"){
-		aa=Number(z_a.value);
-		dd=Number(sz_b.value);
+		aa=Math.floor(Number(z_a.value)*v_a_ch);
+		dd=Math.floor(Number(sz_b.value)*v_z_b);
 	}else if(key1s[2]=="特殊"){
-		aa=Number(z_c.value);
-		dd=Number(sz_d.value);
+		aa=Math.floor(Number(z_c.value)*v_c_ch);
+		dd=Math.floor(Number(sz_d.value)*v_z_d);
 		if(stokusei.value=="こおりのりんぷん" && !stmukou.checked){
 			if(tokusei.value!="かたやぶり"){
 				m1[4]=0.5*m1[4];
@@ -1196,18 +1480,20 @@ function dame(){
 			}
 		}
 	}
-	if(waza1_name=="サイコショック"){
-		dd=Number(sz_b.value);
+	if(waza1_name=="サイコショック" || waza1_name=="サイコブレイク" || waza1_name=="しんぴのつるぎ"){
+		dd=Math.floor(Number(sz_b.value)*v_z_b);
 	}else if(waza1_name=="イカサマ"){
-		aa=Number(sz_a.value);
+		aa=Math.floor(Number(sz_a.value)*v_z_a);
+	}else if(waza1_name=="ボディプレス"){
+		aa=Math.floor(Number(z_b.value)*v_b_ch);
 	}
 	
 	if(key4s[2]=="物理"){
-		aa2=Number(sz_a.value);
-		dd2=Number(z_b.value);
+		aa2=Math.floor(Number(sz_a.value)*v_z_a);
+		dd2=Math.floor(Number(z_b.value)*v_b_ch);
 	}else if(key4s[2]=="特殊"){
-		aa2=Number(sz_c.value);
-		dd2=Number(z_d.value);
+		aa2=Math.floor(Number(sz_c.value)*v_z_c);
+		dd2=Math.floor(Number(z_d.value)*v_d_ch);
 		if(tokusei.value=="こおりのりんぷん" && !tmukou.checked){
 			if(stokusei.value!="かたやぶり"){
 				m1[4]=0.5*m1[4];
@@ -1216,13 +1502,13 @@ function dame(){
 			}
 		}
 	}
-	if(waza2_name=="サイコショック"){
-		dd=Number(z_b.value);
+	if(waza2_name=="サイコショック" || waza2_name=="サイコブレイク" || waza2_name=="しんぴのつるぎ"){
+		dd2=Math.floor(Number(z_b.value)*v_b_ch);
 	}else if(waza2_name=="イカサマ"){
-		aa=Number(z_a.value);
+		aa2=Math.floor(Number(z_a.value)*v_a_ch);
+	}else if(waza2_name=="ボディプレス"){
+		aa2=Math.floor(Number(sz_b.value)*v_z_b);
 	}
-	
-
 	
 	if(key5s.indexOf("フレンドガード")!=-1){
 		m2[6]=0.75*m2[6];
@@ -1319,6 +1605,10 @@ function dame(){
 				dd=Math.floor(dd*1.5);
 			}else if(key3s.indexOf("こおり")!=-1 && waza1_name=="サイコショック"){
 				dd=Math.floor(dd*1.5);
+			}else if(key3s.indexOf("こおり")!=-1 && waza1_name=="サイコブレイク"){
+				dd=Math.floor(dd*1.5);
+			}else if(key3s.indexOf("こおり")!=-1 && waza1_name=="しんぴのつるぎ"){
+				dd=Math.floor(dd*1.5);
 			}
 		}
 		if(motimono.value!="ばんのうがさ"){
@@ -1326,16 +1616,20 @@ function dame(){
 				dd2=Math.floor(dd*1.5);
 			}else if(key2s.indexOf("こおり")!=-1 && waza2_name=="サイコショック"){
 				dd2=Math.floor(dd*1.5);
+			}else if(key2s.indexOf("こおり")!=-1 && waza2_name=="サイコブレイク"){
+				dd2=Math.floor(dd*1.5);
+			}else if(key2s.indexOf("こおり")!=-1 && waza2_name=="しんぴのつるぎ"){
+				dd2=Math.floor(dd*1.5);
 			}
 		}
 	}else if(key1=="すなあらし" && key5s.indexOf("ノーてんき")==-1 && key5s.indexOf("エアロック")==-1 && key6s.indexOf("ノーてんき")==-1 && key6s.indexOf("エアロック")==-1){
 		if(smotimono.value!="ばんのうがさ"){
-			if(key3s.indexOf("いわ")!=-1 && key1s[2]=="特殊" && waza1_name!="サイコショック"){
+			if(key3s.indexOf("いわ")!=-1 && key1s[2]=="特殊" && waza1_name!="サイコショック" && waza1_name!="サイコブレイク" && waza1_name!="しんぴのつるぎ"){
 				dd=Math.floor(dd*1.5);
 			}
 		}
 		if(motimono.value!="ばんのうがさ"){
-			if(key2s.indexOf("いわ")!=-1 && key4s[2]=="特殊" && waza2_name!="サイコショック"){
+			if(key2s.indexOf("いわ")!=-1 && key4s[2]=="特殊" && waza2_name!="サイコショック" && waza2_name!="サイコブレイク" && waza2_name!="しんぴのつるぎ"){
 				dd2=Math.floor(dd*1.5);
 			}
 		}
@@ -1344,44 +1638,407 @@ function dame(){
 	var ah=syoki;
 	var ah2=syoki;
 	//スロースタート2048
-	//わざわいのうつわ3072
-	//わざわいのおふだ3072
-	//クォークチャージ5325
-	//こだいかっせい5325
-	//トランジスタ5325
-	//ハドロンエンジン5461
-	//ひひいろのこどう5461
-	//こんじょう6144
-	//しんりょく
-	//もうか
-	//げきりゅう
-	//むしのしらせ
-	//もらいび
-	//サンパワー
-	//プラス
-	//マイナス
-	//いわはこび
-	//りゅうのあぎと
-	//ちからもち8192
-	//ヨガパワー
-	//すいほう+みずタイプの技
-	//はりこみ
-	//あついしぼう2048
-	//たいねつ
-	//すいほう+ほのおタイプの技
-	//きよめのしお+ゴーストタイプの技
-	//こだわりハチマキ6144
-	//こだわりメガネ
-	//でんきだま8192
-	//はりきり
-	if(tokusei=="はりきり" && !tmukou.checked){
+	if(tokusei.value=="スロースタート" && !tmukou.checked && tokuseisubc.checked){
 		if(key1s[2]=="物理"){
-			aa=Math.floor(aa*6144/4096);
+			ah=Math.round(ah*2048/4096);
 		}
 	}
-	if(stokusei=="はりきり" && !stmukou.checked){
+	if(stokusei.value=="スロースタート" && !stmukou.checked && stokuseisubc.checked){
 		if(key4s[2]=="物理"){
-			aa2=Math.floor(aa2*6144/4096);
+			ah2=Math.round(ah2*2048/4096);
+		}
+	}
+	
+	//わざわいのうつわ3072
+	if(key5s.indexOf("わざわいのうつわ")!=-1 || key6s.indexOf("わざわいのうつわ")!=-1){
+		if(key1s[2]=="特殊" && tokusei.value!="わざわいのうつわ"){
+			ah=Math.round(ah*3072/4096);
+		}
+		if(key4s[2]=="特殊" && stokusei.value!="わざわいのうつわ"){
+			ah2=Math.round(ah2*3072/4096);
+		}
+	}
+	
+	//わざわいのおふだ3072
+	if(key5s.indexOf("わざわいのおふだ")!=-1 || key6s.indexOf("わざわいのおふだ")!=-1){
+		if(key1s[2]=="物理" && tokusei.value!="わざわいのおふだ"){
+			ah=Math.round(ah*3072/4096);
+		}
+		if(key4s[2]=="物理" && stokusei.value!="わざわいのおふだ"){
+			ah2=Math.round(ah2*3072/4096);
+		}
+	}
+	
+	//クォークチャージ5325
+	//こだいかっせい5325
+	if(tokusei.value=="クォークチャージ" || tokusei.value=="こだいかっせい"){
+		if(!tmukou.checked){
+			if(key1s[2]=="特殊" && tokuseisubc.value=="とくこう"){
+				ah=Math.round(ah*5325/4096);
+			}
+			if(key1s[2]=="物理" && tokuseisubc.value=="こうげき"){
+				ah=Math.round(ah*5325/4096);
+			}
+		}
+	}
+	if(stokusei.value=="クォークチャージ" || stokusei.value=="こだいかっせい"){
+		if(!stmukou.checked){
+			if(key4s[2]=="特殊" && stokuseisubc.value=="とくこう"){
+				ah2=Math.round(ah2*5325/4096);
+			}
+			if(key4s[2]=="物理" && stokuseisubc.value=="こうげき"){
+				ah2=Math.round(ah2*5325/4096);
+			}
+		}
+	}
+	
+	//トランジスタ5325
+	if(tokusei.value=="トランジスタ" && !tmukou.checked && key1s[1]=="でんき"){
+		ah=Math.round(ah*5325/4096);
+	}
+	if(stokusei.value=="トランジスタ" && !stmukou.checked && key4s[1]=="でんき"){
+		ah2=Math.round(ah2*5325/4096);
+	}
+	
+	//ハドロンエンジン5461
+	if(tokusei.value=="ハドロンエンジン" && !tmukou.checked && firudo.value=="エレキフィールド"){
+		if(key1s[2]=="特殊"){
+			ah=Math.round(ah*5461/4096);
+		}
+	}
+	if(stokusei.value=="ハドロンエンジン" && !stmukou.checked && firudo.value=="エレキフィールド"){
+		if(key4s[2]=="特殊"){
+			ah2=Math.round(ah2*5461/4096);
+		}
+	}
+	
+	//ひひいろのこどう5461
+	if(tokusei.value=="ひひいろのこどう" && !tmukou.checked && tenki.value=="はれ"){
+		if(key1s[2]=="物理"){
+			ah=Math.round(ah*5461/4096);
+		}
+	}
+	if(stokusei.value=="ひひいろのこどう" && !stmukou.checked && tenki.value=="はれ"){
+		if(key4s[2]=="物理"){
+			ah2=Math.round(ah2*5461/4096);
+		}
+	}
+	
+	//こんじょう6144
+	if(tokusei.value=="こんじょう" && !tmukou.checked && ijo.value!="通常"){
+		if(key1s[2]=="物理"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="こんじょう" && !stmukou.checked && sijo.value!="通常"){
+		if(key4s[2]=="物理"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//しんりょく
+	if(tokusei.value=="しんりょく" && !tmukou.checked && tokuseisubc.checked){
+		if(key1s[1]=="くさ"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="しんりょく" && !stmukou.checked && stokuseisubc.checked){
+		if(key4s[1]=="くさ"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//もうか
+	if(tokusei.value=="もうか" && !tmukou.checked && tokuseisubc.checked){
+		if(key1s[1]=="ほのお"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="もうか" && !stmukou.checked && stokuseisubc.checked){
+		if(key4s[1]=="ほのお"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//げきりゅう
+	if(tokusei.value=="げきりゅう" && !tmukou.checked && tokuseisubc.checked){
+		if(key1s[1]=="みず"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="げきりゅう" && !stmukou.checked && stokuseisubc.checked){
+		if(key4s[1]=="みず"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//むしのしらせ
+	if(tokusei.value=="むしのしらせ" && !tmukou.checked && tokuseisubc.checked){
+		if(key1s[1]=="むし"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="むしのしらせ" && !stmukou.checked && stokuseisubc.checked){
+		if(key4s[1]=="むし"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//もらいび
+	if(tokusei.value=="もらいび" && !tmukou.checked && tokuseisubc.checked){
+		if(key1s[1]=="ほのお"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="もらいび" && !stmukou.checked && stokuseisubc.checked){
+		if(key4s[1]=="ほのお"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//サンパワー
+	if(tokusei.value=="サンパワー" && !tmukou.checked && tenki.value==はれ){
+		if(key1s[2]=="特殊"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="サンパワー" && !stmukou.checked && tenki.value==はれ){
+		if(key4s[2]=="特殊"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//プラス
+	if(tokusei.value=="プラス" && !tmukou.checked && tokuseisubc.checked){
+		if(key1s[2]=="特殊"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="プラス" && !stmukou.checked && stokuseisubc.checked){
+		if(key4s[2]=="特殊"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//マイナス
+	if(tokusei.value=="マイナス" && !tmukou.checked && tokuseisubc.checked){
+		if(key1s[2]=="特殊"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="マイナス" && !stmukou.checked && stokuseisubc.checked){
+		if(key4s[2]=="特殊"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//いわはこび
+	if(tokusei.value=="いわはこび" && !tmukou.checked){
+		if(key1s[1]=="いわ"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="いわはこび" && !stmukou.checked){
+		if(key4s[1]=="いわ"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//りゅうのあぎと
+	if(tokusei.value=="りゅうのあぎと" && !tmukou.checked){
+		if(key1s[1]=="ドラゴン"){
+			ah=Math.round(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="りゅうのあぎと" && !stmukou.checked){
+		if(key4s[1]=="ドラゴン"){
+			ah2=Math.round(ah2*6144/4096);
+		}
+	}
+	
+	//ちからもち8192
+	if(tokusei.value=="ちからもち" && !tmukou.checked){
+		if(key1s[2]=="物理"){
+			ah=Math.round(ah*8192/4096);
+		}
+	}
+	if(stokusei.value=="ちからもち" && !stmukou.checked){
+		if(key4s[2]=="物理"){
+			ah2=Math.round(ah2*8192/4096);
+		}
+	}
+	
+	//ヨガパワー
+	if(tokusei.value=="ヨガパワー" && !tmukou.checked){
+		if(key1s[2]=="物理"){
+			ah=Math.round(ah*8192/4096);
+		}
+	}
+	if(stokusei.value=="ヨガパワー" && !stmukou.checked){
+		if(key4s[2]=="物理"){
+			ah2=Math.round(ah2*8192/4096);
+		}
+	}
+	
+	//すいほう+みずタイプの技
+	if(tokusei.value=="すいほう" && !tmukou.checked){
+		if(key1s[1]=="みず"){
+			ah=Math.round(ah*8192/4096);
+		}
+	}
+	if(stokusei.value=="すいほう" && !stmukou.checked){
+		if(key1s[1]=="みず"){
+			ah2=Math.round(ah2*8192/4096);
+		}
+	}
+	
+	//はりこみ
+	if(tokusei.value=="はりこみ" && !tmukou.checked && tokuseisubc.checked){
+		ah=Math.round(ah*8192/4096);
+	}
+	if(stokusei.value=="はりこみ" && !stmukou.checked && stokuseisubc.checked){
+		ah2=Math.round(ah2*8192/4096);
+	}
+	
+	//あついしぼう2048
+	if(tokusei.value=="あついしぼう" && !tmukou.checked){
+		if(stokusei.value!="かたやぶり"){
+			if(key4s[1]=="こおり" || key4s[1]=="ほのお"){
+				ah2=Math.round(ah2*2048/4096);
+			}
+		}else if(stmukou.checked){
+			if(key4s[1]=="こおり" || key4s[1]=="ほのお"){
+				ah2=Math.round(ah2*2048/4096);
+			}
+		}
+	}
+	if(stokusei.value=="あついしぼう" && !stmukou.checked){
+		if(tokusei.value!="かたやぶり"){
+			if(key1s[1]=="こおり" || key1s[1]=="ほのお"){
+				ah=Math.round(ah*2048/4096);
+			}
+		}else if(tmukou.checked){
+			if(key1s[1]=="こおり" || key1s[1]=="ほのお"){
+				ah=Math.round(ah*2048/4096);
+			}
+		}
+	}
+	
+	//たいねつ
+	if(tokusei.value=="たいねつ" && !tmukou.checked){
+		if(stokusei.value!="かたやぶり"){
+			if(key4s[1]=="ほのお"){
+				ah2=Math.round(ah2*2048/4096);
+			}
+		}else if(stmukou.checked){
+			if(key4s[1]=="ほのお"){
+				ah2=Math.round(ah2*2048/4096);
+			}
+		}
+	}
+	if(stokusei.value=="たいねつ" && !stmukou.checked){
+		if(tokusei.value!="かたやぶり"){
+			if(key1s[1]=="ほのお"){
+				ah=Math.round(ah*2048/4096);
+			}
+		}else if(tmukou.checked){
+			if(key1s[1]=="ほのお"){
+				ah=Math.round(ah*2048/4096);
+			}
+		}
+	}
+	
+	//すいほう+ほのおタイプの技
+	if(tokusei.value=="すいほう" && !tmukou.checked){
+		if(stokusei.value!="かたやぶり"){
+			if(key4s[1]=="ほのお"){
+				ah2=Math.round(ah2*2048/4096);
+			}
+		}else if(stmukou.checked){
+			if(key4s[1]=="ほのお"){
+				ah2=Math.round(ah2*2048/4096);
+			}
+		}
+	}
+	if(stokusei.value=="すいほう" && !stmukou.checked){
+		if(tokusei.value!="かたやぶり"){
+			if(key1s[1]=="ほのお"){
+				ah=Math.round(ah*2048/4096);
+			}
+		}else if(tmukou.checked){
+			if(key1s[1]=="ほのお"){
+				ah=Math.round(ah*2048/4096);
+			}
+		}
+	}
+	
+	//きよめのしお+ゴーストタイプの技
+	if(tokusei.value=="きよめのしお" && !tmukou.checked){
+		if(stokusei.value!="かたやぶり"){
+			if(key4s[1]=="ゴースト"){
+				ah2=Math.round(ah2*2048/4096);
+			}
+		}else if(stmukou.checked){
+			if(key4s[1]=="ゴースト"){
+				ah2=Math.round(ah2*2048/4096);
+			}
+		}
+	}
+	if(stokusei.value=="きよめのしお" && !stmukou.checked){
+		if(tokusei.value!="かたやぶり"){
+			if(key1s[1]=="ゴースト"){
+				ah=Math.round(ah*2048/4096);
+			}
+		}else if(tmukou.checked){
+			if(key1s[1]=="ゴースト"){
+				ah=Math.round(ah*2048/4096);
+			}
+		}
+		
+	}
+	
+	//こだわりハチマキ6144
+	if(motimono.value=="こだわりハチマキ"){
+		if(key1s[2]=="物理"){
+			ah=Math.floor(ah*6144/4096);
+		}
+	}
+	if(smotimono.value=="こだわりハチマキ"){
+		if(key4s[2]=="物理"){
+			ah2=Math.floor(ah2*6144/4096);
+		}
+	}
+	
+	//こだわりメガネ
+	if(motimono.value=="こだわりメガネ"){
+		if(key1s[2]=="特殊"){
+			ah=Math.floor(ah*6144/4096);
+		}
+	}
+	if(smotimono.value=="こだわりメガネ"){
+		if(key4s[2]=="特殊"){
+			ah2=Math.floor(ah2*6144/4096);
+		}
+	}
+	
+	//でんきだま8192
+	if(motimono.value=="でんきだま" && name.value=="ピカチュウ"){
+		ah=Math.floor(ah*8192/4096);
+	}
+	if(smotimono.value=="でんきだま" && sname.value=="ピカチュウ"){
+		ah2=Math.floor(ah2*8192/4096);
+	}
+	
+	
+	//はりきり
+	if(tokusei.value=="はりきり" && !tmukou.checked){
+		if(key1s[2]=="物理"){
+			ah=Math.floor(ah*6144/4096);
+		}
+	}
+	if(stokusei.value=="はりきり" && !stmukou.checked){
+		if(key4s[2]=="物理"){
+			ah2=Math.floor(ah2*6144/4096);
 		}
 	}
 	
@@ -1396,6 +2053,208 @@ function dame(){
 		aa2=Math.floor(aa2)+1;
 	}else{
 		aa2=Math.floor(aa2);
+	}
+	
+	var bh=syoki;
+	var bh2=syoki;
+	//わざわいのたま3072
+	if(key5s.indexOf("わざわいのたま")!=-1 || key6s.indexOf("わざわいのたま")!=-1){
+		if(key1s[2]=="特殊" && stokusei.value!="わざわいのたま" && waza1_name!="サイコショック" && waza1_name!="サイコブレイク" && waza1_name!="しんぴのつるぎ"){
+			bh=Math.round(bh*3072/4096);
+		}
+		if(key4s[2]=="特殊" && tokusei.value!="わざわいのたま" && waza2_name!="サイコショック" && waza2_name!="サイコブレイク" && waza2_name!="しんぴのつるぎ"){
+			bh2=Math.round(bh2*3072/4096);
+		}
+	}
+	
+	//わざわいのつるぎ
+	if(key5s.indexOf("わざわいのつるぎ")!=-1 || key6s.indexOf("わざわいのつるぎ")!=-1){
+		if(key1s[2]=="物理" && stokusei.value!="わざわいのつるぎ"){
+			bh=Math.round(bh*3072/4096);
+		}
+		if(key4s[2]=="物理" && tokusei.value!="わざわいのつるぎ"){
+			bh2=Math.round(bh2*3072/4096);
+		}
+		if(waza1_name=="サイコショック" || waza1_name=="サイコブレイク" || waza1_name=="しんぴのつるぎ"){
+			if(stokusei.value!="わざわいのつるぎ"){
+				bh=Math.round(bh*3072/4096);
+			}
+		}
+		if(waza2_name=="サイコショック" || waza2_name=="サイコブレイク" || waza2_name=="しんぴのつるぎ"){
+			if(tokusei.value!="わざわいのつるぎ"){
+				bh2=Math.round(bh2*3072/4096);
+			}
+		}
+	}
+	
+	//クォークチャージ5325
+	//こだいかっせい
+	if(tokusei.value=="クォークチャージ" || tokusei.value=="こだいかっせい"){
+		if(!tmukou.checked){
+			if(stokusei.value!="かたやぶり"){
+				if(key4s[2]=="特殊" && tokuseisubc.value=="とくぼう" && waza2_name!="サイコショック" && waza2_name!="サイコブレイク" && waza2_name!="しんぴのつるぎ"){
+					bh2=Math.round(bh2*5325/4096);
+				}
+				if(key4s[2]=="物理" && tokuseisubc.value=="ぼうぎょ"){
+					bh2=Math.round(bh2*5325/4096);
+				}
+				if(waza2_name!="サイコショック" || waza2_name!="サイコブレイク" || waza2_name!="しんぴのつるぎ"){
+					if(tokuseisubc.value=="ぼうぎょ"){
+						bh2=Math.round(bh2*5325/4096);
+					}
+				}
+			}else if(stmukou.checked){
+				if(key4s[2]=="特殊" && tokuseisubc.value=="とくぼう" && waza2_name!="サイコショック" && waza2_name!="サイコブレイク" && waza2_name!="しんぴのつるぎ"){
+					bh2=Math.round(bh2*5325/4096);
+				}
+				if(key4s[2]=="物理" && tokuseisubc.value=="ぼうぎょ"){
+					bh2=Math.round(bh2*5325/4096);
+				}
+				if(waza2_name!="サイコショック" || waza2_name!="サイコブレイク" || waza2_name!="しんぴのつるぎ"){
+					if(tokuseisubc.value=="ぼうぎょ"){
+						bh2=Math.round(bh2*5325/4096);
+					}
+				}
+			}
+		}
+	}
+	if(stokusei.value=="クォークチャージ" || stokusei.value=="こだいかっせい"){
+		if(!stmukou.checked){
+			if(tokusei.value!="かたやぶり"){
+				if(key1s[2]=="特殊" && stokuseisubc.value=="とくぼう" && waza1_name!="サイコショック" && waza1_name!="サイコブレイク" && waza1_name!="しんぴのつるぎ"){
+					bh=Math.round(bh*5325/4096);
+				}
+				if(key1s[2]=="物理" && stokuseisubc.value=="ぼうぎょ"){
+					bh=Math.round(bh*5325/4096);
+				}
+				if(waza1_name!="サイコショック" || waza1_name!="サイコブレイク" || waza1_name!="しんぴのつるぎ"){
+					if(stokuseisubc.value=="ぼうぎょ"){
+						bh=Math.round(bh*5325/4096);
+					}
+				}
+			}else if(tmukou.checked){
+				if(key1s[2]=="特殊" && stokuseisubc.value=="とくぼう" && waza1_name!="サイコショック" && waza1_name!="サイコブレイク" && waza1_name!="しんぴのつるぎ"){
+					bh=Math.round(bh*5325/4096);
+				}
+				if(key1s[2]=="物理" && stokuseisubc.value=="ぼうぎょ"){
+					bh=Math.round(bh*5325/4096);
+				}
+				if(waza1_name!="サイコショック" || waza1_name!="サイコブレイク" || waza1_name!="しんぴのつるぎ"){
+					if(stokuseisubc.value=="ぼうぎょ"){
+						bh=Math.round(bh*5325/4096);
+					}
+				}
+			}
+		}
+	}
+	
+	//フラワーギフト6144
+	//ふしぎなうろこ
+	if(stokusei.value=="ふしぎなうろこ" && !stmukou.checked){
+		if(tokusei.value!="かたやぶり"){
+			if(key1s[2]=="物理" && sijo.value!="通常"){
+				bh=Math.round(bh*6144/4096);
+			}
+		}else if(tmukou.checked){
+			if(key1s[2]=="物理" && sijo.value!="通常"){
+				bh=Math.round(bh*6144/4096);
+			}
+		}
+	}
+	if(tokusei.value=="ふしぎなうろこ" && !tmukou.checked){
+		if(stokusei.value!="かたやぶり"){
+			if(key4s[2]=="物理" && ijo.value!="通常"){
+				bh2=Math.round(bh2*6144/4096);
+			}
+		}else if(stmukou.checked){
+			if(key4s[2]=="物理" && ijo.value!="通常"){
+				bh2=Math.round(bh2*6144/4096);
+			}
+		}
+	}
+	
+	//くさのけがわ
+	if(stokusei.value=="くさのけがわ" && !stmukou.checked){
+		if(tokusei.value!="かたやぶり"){
+			if(key1s[2]=="物理" && firudo.value=="グラスフィールド"){
+				bh=Math.round(bh*6144/4096);
+			}
+		}else if(tmukou.checked){
+			if(key1s[2]=="物理" && firudo.value=="グラスフィールド"){
+				bh=Math.round(bh*6144/4096);
+			}
+		}
+	}
+	if(tokusei.value=="くさのけがわ" && !tmukou.checked){
+		if(stokusei.value!="かたやぶり"){
+			if(key4s[2]=="物理" && firudo.value=="グラスフィールド"){
+				bh2=Math.round(bh2*6144/4096);
+			}
+		}else if(stmukou.checked){
+			if(key4s[2]=="物理" && firudo.value=="グラスフィールド"){
+				bh2=Math.round(bh2*6144/4096);
+			}
+		}
+	}
+	
+	//ファーコート8192
+	if(stokusei.value=="ファーコート" && !stmukou.checked){
+		if(tokusei.value!="かたやぶり"){
+			if(key1s[2]=="物理"){
+				bh=Math.round(bh*8192/4096);
+			}
+		}else if(tmukou.checked){
+			if(key1s[2]=="物理"){
+				bh=Math.round(bh*8192/4096);
+			}
+		}
+	}
+	if(tokusei.value=="ファーコート" && !tmukou.checked){
+		if(stokusei.value!="かたやぶり"){
+			if(key4s[2]=="物理"){
+				bh2=Math.round(bh2*8192/4096);
+			}
+		}else if(stmukou.checked){
+			if(key4s[2]=="物理"){
+				bh2=Math.round(bh2*8192/4096);
+			}
+		}
+	}
+	
+	//しんかのきせき6144
+	if(motimono.value=="しんかのきせき"){
+		bh2=Math.round(bh2*6144/4096);
+	}
+	if(smotimono.value=="しんかのきせき"){
+		bh=Math.round(bh*6144/4096);
+	}
+	
+	//とつげきチョッキ
+	if(motimono.value=="とつげきチョッキ"){
+		if(key4s[2]=="特殊" && waza2_name!="サイコショック" && waza2_name!="サイコブレイク" && waza2_name!="しんぴのつるぎ"){
+			bh2=Math.round(bh2*6144/4096);
+		}
+	}
+	if(smotimono.value=="とつげきチョッキ"){
+		if(key1s[2]=="特殊" && waza1_name!="サイコショック" && waza1_name!="サイコブレイク" && waza1_name!="しんぴのつるぎ"){
+			bh=Math.round(bh*6144/4096);
+		}
+	}
+	
+	//しんかいのウロコ8192
+	//メタルパウダー
+	
+	dd=dd*bh/syoki;
+	if(dd-Math.floor(dd)>0.5){
+		dd=Math.floor(dd)+1;
+	}else{
+		dd=Math.floor(dd);
+	}
+	dd2=dd2*bh2/syoki;
+	if(dd-Math.floor(dd2)>0.5){
+		aa2=Math.floor(dd2)+1;
+	}else{
+		dd2=Math.floor(dd2);
 	}
 	
 	var kyu=4096;
@@ -1513,6 +2372,9 @@ function dame(){
 					m1[3]=2*m1[3];
 				}
 			}
+		}
+		if(key6s.indexOf("タールショット")!=-1 && sterasu.value=="なし"){
+			big.push(2)
 		}
 	}else if(key1s[1]=="くさ"){
 		if(stokusei.value=="そうしょく"){
@@ -2033,6 +2895,9 @@ function dame(){
 				}
 			}
 		}
+		if(key5s.indexOf("タールショット")!=-1 && terasu.value=="なし"){
+			big.push(2)
+		}
 	}else if(key4s[1]=="くさ"){
 		if(tokusei.value=="そうしょく"){
 			if(!tmukou.checked){
@@ -2519,10 +3384,34 @@ function dame(){
 	}
 	
 	if(motimono.value=="メトロノーム"){
-		m1[8]=syoki;
+		if(nomu.value==6){
+			m1[8]=8192;
+		}else if(nomu.value==2){
+			m1[8]=4915;
+		}else if(nomu.value==3){
+			m1[8]=5734;
+		}else if(nomu.value==4){
+			m1[8]=6553;
+		}else if(nomu.value==5){
+			m1[8]=7372;
+		}else{
+			m1[8]=syoki;
+		}
 	}
 	if(smotimono.value=="メトロノーム"){
-		m2[8]=syoki;
+		if(snomu.value==6){
+			m2[8]=8192;
+		}else if(snomu.value==2){
+			m2[8]=4915;
+		}else if(snomu.value==3){
+			m2[8]=5734;
+		}else if(snomu.value==4){
+			m2[8]=6553;
+		}else if(snomu.value==5){
+			m2[8]=7372;
+		}else{
+			m2[8]=syoki;
+		}
 	}
 	
 	if(motimono.value=="いのちのたま"){
