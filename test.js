@@ -2172,8 +2172,8 @@ function sAllTokusei(){
 }
 
 function setTokusei(){
-	v_name=tokusei.value
-	if(v_name=="ノーてんき" || v_name=="エアロック"){
+	v_name=tokusei.value;
+	if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
 		if(sonotalist.value==""){
 			sonotalist.value=v_name;
 		}else{
@@ -2214,7 +2214,7 @@ function setTokusei(){
 	}else if(v_name=="ミストメーカー"){
 		firudo.value="ミストフィールド";
 		sfirudo.value="ミストフィールド";
-	}else if(v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ" || v_name=="はがねのせいしん"){
+	}else if(v_name=="はがねのせいしん"){
 		if(sonotalist.value==""){
 			sonotalist.value=v_name;
 		}else{
@@ -2227,8 +2227,8 @@ function setTokusei(){
 }
 
 function ssetTokusei(){
-	v_name=stokusei.value
-	if(v_name=="ノーてんき" || v_name=="エアロック"){
+	v_name=stokusei.value;
+	if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
 		if(sonotalist.value==""){
 			sonotalist.value=v_name;
 		}else{
@@ -2269,7 +2269,7 @@ function ssetTokusei(){
 	}else if(v_name=="ミストメーカー"){
 		firudo.value="ミストフィールド";
 		sfirudo.value="ミストフィールド";
-	}else if(v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ" || v_name=="はがねのせいしん"){
+	}else if(v_name=="はがねのせいしん"){
 		if(sonotalist.value==""){
 			ssonotalist.value=v_name;
 		}else{
