@@ -38,6 +38,13 @@
 		bottom:0vh;
 		left:30vw;
 	}
+	
+	.tyousei{
+		display: none;
+	}
+	.styousei{
+		display: none;
+	}
 
 </style>
 
@@ -75,6 +82,7 @@
 				持ち物：
 				<select id="motimono">
 				</select>
+				<a id="metoro"></a>
 			</td>
 		</tr>
 		<tr>
@@ -197,9 +205,10 @@
 		</tr>
 	</table>
 
-	<table style="width: 700px;margin: 0 auto;">
+	<div class="kani" style="width: 700px;margin: 0 auto;"><a id="hukkatu">耐久調整</a></div>
+	<table style="width: 700px;margin: 0 auto;" class="tyousei">
 		<tr>
-			<th width="100"></th>
+			<td width="100" id="syouryaku">省略</td>
 			<th width="100">種族値</th>
 			<th width="100">個体値</th>
 			<th width="100">努力値</th>
@@ -518,6 +527,7 @@
 				持ち物：
 				<select id="smotimono">
 				</select>
+				<a id="smetoro"></a>
 			</td>
 		</tr>
 		<tr>
@@ -641,9 +651,10 @@
 		</tr>
 	</table>
 
-	<table style="width: 700px;margin: 0 auto;">
+	<div class="skani" style="width: 700px;margin: 0 auto;"><a id="shukkatu">耐久調整</a></div>
+	<table style="width: 700px;margin: 0 auto;" class="styousei">
 		<tr>
-			<th width="100"></th>
+			<td width="100" id="ssyouryaku">省略</td>
 			<th width="100">種族値</th>
 			<th width="100">個体値</th>
 			<th width="100">努力値</th>
@@ -837,6 +848,11 @@
 	var sctx = document.getElementById("smyChart");
 	let skyuusyo=document.getElementById("skyuusyo");
 	
+	let syouryaku=document.getElementById("syouryaku");
+	let hukkatu=document.getElementById("hukkatu");
+	let ssyouryaku=document.getElementById("ssyouryaku");
+	let shukkatu=document.getElementById("shukkatu");
+	
 	let s_h = document.getElementById('s_h');
 	let k_h = document.getElementById('k_h');
 	let d_h = document.getElementById('d_h');
@@ -901,6 +917,17 @@
 	let sz_s = document.getElementById('sz_s');
 	let ss_ch = document.getElementById('ss_ch');
 	
+	let r_a = document.getElementById('r_a');
+	let sr_a = document.getElementById('sr_a');
+	let r_b = document.getElementById('r_b');
+	let sr_b = document.getElementById('sr_b');
+	let r_c = document.getElementById('r_c');
+	let sr_c = document.getElementById('sr_c');
+	let r_d = document.getElementById('r_d');
+	let sr_d = document.getElementById('sr_d');
+	let r_s = document.getElementById('r_s');
+	let sr_s = document.getElementById('sr_s');
+	
 	let s_sum = document.getElementById('s_sum');
 	let d_sum2 = document.getElementById('d_sum');
 	let ss_sum = document.getElementById('ss_sum');
@@ -928,6 +955,11 @@
 	
 	let tmukou= document.getElementById('tmukou');
 	let stmukou= document.getElementById('stmukou');
+	
+	let metoro= document.getElementById('metoro');
+	let smetoro= document.getElementById('smetoro');
+	var nomu;
+	var snomu;
 	
 	let subu= document.getElementById('subu');
 	var subuc;
@@ -1245,7 +1277,7 @@
 		if(v_name!=""){
 			if(newArr==""){
 				sonotalist.value=v_name;
-				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
 					big=ssonotalist.value.split(",");
 					if(big.indexOf(v_name)==-1){
 						if(big[0]==""){
@@ -1259,7 +1291,7 @@
 				big=newArr.split(",");
 				if(big.indexOf(v_name)==-1){
 					sonotalist.value=newArr+","+v_name;
-					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
 						big=ssonotalist.value.split(",");
 						if(big.indexOf(v_name)==-1){
 							if(big[0]==""){
@@ -1273,7 +1305,7 @@
 					big.splice(big.indexOf(v_name), 1 );
 					newArr=big.join(",");
 					sonotalist.value=newArr;
-					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
 						big=ssonotalist.value.split(",");
 						if(big.indexOf(v_name)!=-1){
 							big.splice(big.indexOf(v_name), 1 );
@@ -1296,7 +1328,7 @@
 		if(v_name!=""){
 			if(newArr==""){
 				ssonotalist.value=v_name;
-				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
 					big=sonotalist.value.split(",");
 					if(big.indexOf(v_name)==-1){
 						if(big[0]==""){
@@ -1310,7 +1342,7 @@
 				big=newArr.split(",");
 				if(big.indexOf(v_name)==-1){
 					ssonotalist.value=newArr+","+v_name;
-					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
 						big=sonotalist.value.split(",");
 						if(big.indexOf(v_name)==-1){
 							if(big[0]==""){
@@ -1324,7 +1356,7 @@
 					big.splice(big.indexOf(v_name), 1 );
 					newArr=big.join(",");
 					ssonotalist.value=newArr;
-					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく"){
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
 						big=sonotalist.value.split(",");
 						if(big.indexOf(v_name)!=-1){
 							big.splice(big.indexOf(v_name), 1 );
@@ -1597,9 +1629,11 @@
     
     tokusei.oninput = function() {
     	setTokusei()
+    	tokusub()
     };
     stokusei.oninput = function() {
     	ssetTokusei()
+    	stokusub()
     };
     
     function showPopup(){
@@ -1617,11 +1651,28 @@
     	}
     }
     
-    tokusei.oninput = function() {
-		tokusub()
-	};
-	stokusei.oninput = function() {
-		stokusub()
-	};
+    motimono.oninput = function() {
+    	metorof()
+    }
+    smotimono.oninput = function() {
+    	smetorof()
+    }
+    
+    syouryaku.addEventListener('click', (e) => {
+		document.querySelector(".tyousei").style.display = "none";
+		document.querySelector(".kani").style.display = "block";
+    })
+    ssyouryaku.addEventListener('click', (e) => {
+		document.querySelector(".styousei").style.display = "none";
+		document.querySelector(".skani").style.display = "block";
+    })
+    hukkatu.addEventListener('click', (e) => {
+		document.querySelector(".kani").style.display = "none";
+		document.querySelector(".tyousei").style.display = "block";
+	})
+	shukkatu.addEventListener('click', (e) => {
+		document.querySelector(".skani").style.display = "none";
+		document.querySelector(".styousei").style.display = "block";
+	})
 </script>
 </html>
