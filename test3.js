@@ -527,7 +527,7 @@ function W1update(x){
 	}
 	waza1name.innerHTML=newArr;
 	
-	if(x=="うっぷんばらし" || x=="クロスサンダー" || x=="クロスフレイム" || x=="ダメおし" || x=="かたきうち" || x=="しおみず"){
+	if(x=="うっぷんばらし" || x=="クロスサンダー" || x=="クロスフレイム" || x=="ダメおし" || x=="かたきうち" || x=="しおみず" || x=="ゆきなだれ"){
 		subu.innerHTML='<input type="checkbox" id="subuc" name="subuc"/><label for="subuc">２倍</label>';
 		subuc= document.getElementById('subuc');
 	}else{
@@ -562,7 +562,7 @@ function W2update(x){
 	}
 	waza2name.innerHTML=newArr;
 	
-	if(x=="うっぷんばらし" || x=="クロスサンダー" || x=="クロスフレイム" || x=="ダメおし" || x=="かたきうち" || x=="しおみず"){
+	if(x=="うっぷんばらし" || x=="クロスサンダー" || x=="クロスフレイム" || x=="ダメおし" || x=="かたきうち" || x=="しおみず" || x=="ゆきなだれ"){
 		ssubu.innerHTML='<input type="checkbox" id="ssubuc" name="ssubuc"/><label for="ssubuc">２倍</label>';
 		ssubuc= document.getElementById('ssubuc');
 	}else{
