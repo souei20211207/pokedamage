@@ -48,3 +48,20 @@ function sAllMotimono(){
 	}
 	smotimono.innerHTML=newArr;
 }
+
+function metorof(){
+	if(motimono.value=="メトロノーム"){
+		metoro.innerHTML='<select id="nomu"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select>回目';
+		nomu= document.getElementById('nomu');
+	}else{
+		metoro.innerHTML="";
+	}
+}
+function smetorof(){
+	if(smotimono.value=="メトロノーム"){
+		smetoro.innerHTML='<select id="snomu"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select>回目';
+		snomu= document.getElementById('snomu');
+	}else{
+		smetoro.innerHTML="";
+	}
+}
