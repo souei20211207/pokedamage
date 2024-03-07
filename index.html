@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>ダメ計ツール</title>
+	<script src="test.js"></script>
+	<script src="test2.js"></script>
+	<script src="test3.js"></script>
+	<script src="test4.js"></script>
+	<script src="test5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+	
+</head>
+
+<body>
+<style>
+	.popup {
+		display: none;
+		position: absolute;
+		background-color: #f9f9f9;
+		border: 1px solid #ccc;
+		padding: 10px;
+		width: 40vw;
+		height:20vh;
+		z-index: 1;
+		left:30vw;
+	}
+	
+	.spopup {
+		display: none;
+		position: absolute;
+		background-color: #f9f9f9;
+		border: 1px solid #ccc;
+		padding: 10px;
+		width: 40vw;
+		height:20vh;
+		z-index: 1;
+		bottom:0vh;
+		left:30vw;
+	}
+	
+	.tyousei{
+		display: none;
+	}
+	.styousei{
+		display: none;
+	}
+
+</style>
+
+	<p style="text-align: center">
+		<font size="+2" face="cursive"><input type="radio" name="drone" id="singuru" value="singuru" checked/><label for="singuru">シングル</label></font>
+		<font size="+2" face="cursive"><input type="radio" name="drone" id="daburu" value="daburu"/><label for="daburu">ダブル</label></font>
+	</p>
+	<p style="width: 700px;margin: 0 auto;">
+		<font size="+2" face="cursive">１P</font>
+	</p>
+	<table style="width: 700px;margin: 0 auto;">
+		<tr height="30px">
+			<td width="100">
+				ポケモン名
+			</td>
+			<td id="poketype" width="200">
+			</td>
+			<td>
+				特性：
+				<select id="tokusei">
+				</select>
+				<input type="checkbox" id="tmukou" name="tmukou"/><label for="tmukou">特性無効</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="text" id="name" list="codeType" autocomplete="off"/>
+				<button type="button" onclick="syuzokuup()">種族値セット</button>
+			</td>
+			<td><div id="tokuseisub"></div></td>
+		</tr>
+		<tr height="30px">
+			<td colspan="2"></td>
+			<td>
+				持ち物：
+				<select id="motimono">
+				</select>
+				<a id="metoro"></a>
+			</td>
+		</tr>
+		<tr>
+			<td id="pokelink" colspan="3"></td>
+		</tr>
+		<tr height="30px">
+			<td colspan="2">レベル：<input type="number" id="level" min="1" max="100" value="50"></td>
+			<td>
+				状態異常：
+				<select id="ijo">
+					<option value="通常">通常</option>
+					<option value="どく">どく</option>
+					<option value="まひ">まひ</option>
+					<option value="やけど">やけど</option>
+					<option value="ねむり">ねむり</option>
+					<option value="こおり">こおり</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<table style="width: 400px;margin: 0 auto;">
+		<tr align="center">
+			<th colspan="5">
+				ランク
+			</th>
+		</tr>
+		<tr align="center">
+			<td width="80">こうげき</td>
+			<td bgcolor="#f5deb3" width="80">ぼうぎょ</td>
+			<td width="80">とくこう</td>
+			<td bgcolor="#f5deb3" width="80">とくぼう</td>
+			<td width="80">すばやさ</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<select id="r_a">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+			<td bgcolor="#f5deb3">
+				<select id="r_b">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+			<td>
+				<select id="r_c">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+			<td bgcolor="#f5deb3">
+				<select id="r_d">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+			<td>
+				<select id="r_s">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+
+	<div class="kani" style="width: 700px;margin: 0 auto;">
+		<table style="width: 600px;margin: 0 auto;">
+			<tr align="center">
+				<td id="hukkatu"><font style="text-decoration: underline;" color="blue">耐久調整</font></td>
+				<th bgcolor="#f5deb3">HP</th>
+				<th>こうげき</th>
+				<th bgcolor="#f5deb3">ぼうぎょ</th>
+				<th>とくこう</th>
+				<th bgcolor="#f5deb3">とくぼう</th>
+			</tr>
+			<tr align="center">
+				<td width="100">努力値</td>
+				<td width="100" bgcolor="#f5deb3"><input type="number" id="k_d_h" min="0" max="252" value="0" step="4"></td>
+				<td width="100"><input type="number" id="k_d_a" min="0" max="252" value="0" step="4"></td>
+				<td width="100" bgcolor="#f5deb3"><input type="number" id="k_d_b" min="0" max="252" value="0" step="4"></td>
+				<td width="100"><input type="number" id="k_d_c" min="0" max="252" value="0" step="4"></td>
+				<td width="100" bgcolor="#f5deb3"><input type="number" id="k_d_d" min="0" max="252" value="0" step="4"></td>
+			</tr>
+			<tr align="center">
+				<td width="100">実数値</td>
+				<td width="100" bgcolor="#f5deb3" id="k_z_h"></td>
+				<td width="100" id="k_z_a"></td>
+				<td width="100" bgcolor="#f5deb3" id="k_z_b"></td>
+				<td width="100" id="k_z_c"></td>
+				<td width="100" bgcolor="#f5deb3" id="k_z_d"></td>
+			</tr>
+		</table>
+	</div>
+	<table style="width: 700px;margin: 0 auto;" class="tyousei">
+		<tr align="center">
+			<td width="100" id="syouryaku"><font style="text-decoration: underline;" color="blue">省略</font></td>
+			<th width="100">種族値</th>
+			<th width="100">個体値</th>
+			<th width="100">努力値</th>
+			<th width="100">性格補正</th>
+			<th width="100">実数値</th>
+			<th width="100">その他の補正</th>
+		</tr>
+		<tr align="center" bgcolor="#f5deb3">
+			<td>HP</td>
+			<td><input type="number" id="s_h" min="1" max="999" value="1"></td>
+			<td><input type="number" id="k_h" min="0" max="31" value="31"></td>
+			<td><input type="number" id="d_h" min="0" max="252" value="0" step="4"></td>
+			<td></td>
+			<td><input type="number" id="z_h" min="1" max="999" value="76"></td>
+			<td></td>
+		</tr>
+		<tr align="center">
+			<td>こうげき</td>
+			<td><input type="number" id="s_a" min="1" max="999" value="1"></td>
+			<td><input type="number" id="k_a" min="0" max="31" value="31"></td>
+			<td><input type="number" id="d_a" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="a_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="z_a" min="1" max="999" value="21"></td>
+		</tr>
+		<tr align="center" bgcolor="#f5deb3">
+			<td>ぼうぎょ</td>
+			<td><input type="number" id="s_b" min="1" max="999" value="1"></td>
+			<td><input type="number" id="k_b" min="0" max="31" value="31"></td>
+			<td><input type="number" id="d_b" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="b_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="z_b" min="1" max="999" value="21"></td>
+			<td><input type="number" id="o_b" min="0.01" max="4" value="1" step="0.01"></td>
+		</tr>
+		<tr align="center">
+			<td>とくこう</td>
+			<td><input type="number" id="s_c" min="1" max="999" value="1"></td>
+			<td><input type="number" id="k_c" min="0" max="31" value="31"></td>
+			<td><input type="number" id="d_c" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="c_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="z_c" min="1" max="999" value="21"></td>
+		</tr>
+		<tr align="center" bgcolor="#f5deb3">
+			<td>とくぼう</td>
+			<td><input type="number" id="s_d" min="1" max="999" value="1"></td>
+			<td><input type="number" id="k_d" min="0" max="31" value="31"></td>
+			<td><input type="number" id="d_d" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="d_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="z_d" min="1" max="999" value="21"></td>
+			<td><input type="number" id="o_d" min="0.01" max="4" value="1" step="0.01"></td>
+		</tr>
+		<tr align="center">
+			<td>すばやさ</td>
+			<td><input type="number" id="s_s" min="1" max="999" value="1"></td>
+			<td><input type="number" id="k_s" min="0" max="31" value="31"></td>
+			<td><input type="number" id="d_s" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="s_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="z_s" min="1" max="999" value="21"></td>
+		</tr>
+		<tr align="center" bgcolor="#f5deb3">
+			<td>SUM</td>
+			<td id="s_sum">6</td>
+			<td></td>
+			<td id="d_sum">0</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr align="center" height="50px">
+			<td colspan="2">攻撃を受ける比率</td>
+			<td>物理</td>
+			<td colspan="2"><input type="range" id="a_vs_c" min="0" max="100" style="width:200px"/></td>
+			<td>特殊</td>
+			<td><output id="a_vs_c_v"></output></td>
+		</tr>
+		<tr align="center">
+			<td colspan="5">
+				<button type="button" onclick="updateButton()" style="width:300px;height:50px">耐久調整</button>
+			</td>
+			<td colspan="2">
+				<button type="button" onclick="resetButton()" style="height:50px">努力値リセット</button>
+			</td>
+		</tr>
+
+	</table>
+	<div style="width: 700px;margin: 0 auto;">
+	<table id="result" border="1">
+	</table>
+	</div>
+	<table style="width: 600px;margin: 0 auto;">
+		<tr align="center">
+			<td width="200">天候</td>
+			<td width="200">フィールド</td>
+			<td width="200">壁</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<select id="tenki">
+					<option value="通常">通常</option>
+					<option value="はれ">はれ</option>
+					<option value="あめ">あめ</option>
+					<option value="ゆき">ゆき</option>
+					<option value="すなあらし">すなあらし</option>
+				</select>
+			</td>
+			<td>
+				<select id="firudo">
+					<option value="通常">通常</option>
+					<option value="エレキフィールド">エレキフィールド</option>
+					<option value="グラスフィールド">グラスフィールド</option>
+					<option value="サイコフィールド">サイコフィールド</option>
+					<option value="ミストフィールド">ミストフィールド</option>
+				</select>
+			</td>
+			<td>
+				<select id="kabe">
+					<option value="なし">なし</option>
+					<option value="あり">あり</option>
+				</select>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				その他
+			</td>
+			<td>
+				<select id="sonota">
+					<option value="">---</option>
+					<option value="てだすけ">てだすけ</option>
+					<option value="フレンドガード">フレンドガード</option>
+					<option value="フラワーギフト">フラワーギフト</option>
+					<option value="パワースポット">パワースポット</option>
+					<option value="バッテリー">バッテリー</option>
+					<option value="じゅうりょく">じゅうりょく</option>
+					<option value="わざわいのたま">わざわいのたま</option>
+					<option value="わざわいのつるぎ">わざわいのつるぎ</option>
+					<option value="わざわいのおふだ">わざわいのおふだ</option>
+					<option value="わざわいのうつわ">わざわいのうつわ</option>
+					<option value="ノーてんき">ノーてんき</option>
+					<option value="エアロック">エアロック</option>
+					<option value="タールショット">タールショット</option>
+					<option value="もりののろい">もりののろい</option>
+					<option value="はがねのせいしん">はがねのせいしん</option>
+				</select>
+			</td>
+			<td>
+				<button type="button" onclick="kuria()">クリア</button>
+			</td>
+		</tr>
+		<tr align="center">
+			<td colspan="3">
+				<input type="text" id="sonotalist" autocomplete="off" size="80"/>
+			</td>
+		</tr>
+	</table>
+		
+		
+	<table style="width: 700px;margin: 0 auto;">
+		<tr align="center">
+			<td width="250">
+				<p>テラス</br>
+					<select id="terasu">
+					</select>
+				</p>
+				<p>技：<input type="text" id="waza1" list="waza1codeType" autocomplete="off"/></p>
+				<p id="waza1name"><font size="-1">（威力：-、タイプ：-、物理or特殊）</font></p>
+				<a id="subu"></a>
+			</td>
+			<td width="100">
+				<img src="down.png" alt="down" width="70" height="230" onclick="showPopup()"/>
+				<div class="popup">
+					<canvas id="myChart"></canvas>
+					<span style="background-color:#ffcc99"><input type="checkbox" id="kyuusyo" name="kyuusyo"/><label for="kyuusyo">急所</label></span>
+				</div>
+			</td>
+			<td width="100">
+				<div class="spopup">
+					<canvas id="smyChart"></canvas>
+					<span style="background-color:#ffcc99"><input type="checkbox" id="skyuusyo" name="skyuusyo"/><label for="skyuusyo">急所</label></span>
+				</div>
+				<img src="up.png" alt="up" width="70" height="230" onclick="sshowPopup()"/>
+			</td>
+			<td width="250">
+				<p>テラス</br>
+					<select id="sterasu">
+					</select>
+				</p>
+				<p>技：<input type="text" id="waza2" list="waza2codeType" autocomplete="off"/></p>
+				<p id="waza2name"><font size="-1">（威力：-、タイプ：-、物理or特殊）</font></p>
+				<a id="ssubu"></a>
+			</td>
+		</tr>
+	</table>
+	<table style="width: 600px;margin: 0 auto;">
+		<tr align="center">
+			<td width="200">天候</td>
+			<td width="200">フィールド</td>
+			<td width="200">壁</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<select id="stenki">
+					<option value="通常">通常</option>
+					<option value="はれ">はれ</option>
+					<option value="あめ">あめ</option>
+					<option value="ゆき">ゆき</option>
+					<option value="すなあらし">すなあらし</option>
+				</select>
+			</td>
+			<td>
+				<select id="sfirudo">
+					<option value="通常">通常</option>
+					<option value="エレキフィールド">エレキフィールド</option>
+					<option value="グラスフィールド">グラスフィールド</option>
+					<option value="サイコフィールド">サイコフィールド</option>
+					<option value="ミストフィールド">ミストフィールド</option>
+				</select>
+			</td>
+			<td>
+				<select id="skabe">
+					<option value="なし">なし</option>
+					<option value="あり">あり</option>
+				</select>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				その他
+			</td>
+			<td>
+				<select id="ssonota">
+					<option value="">---</option>
+					<option value="てだすけ">てだすけ</option>
+					<option value="フレンドガード">フレンドガード</option>
+					<option value="フラワーギフト">フラワーギフト</option>
+					<option value="パワースポット">パワースポット</option>
+					<option value="バッテリー">バッテリー</option>
+					<option value="じゅうりょく">じゅうりょく</option>
+					<option value="わざわいのたま">わざわいのたま</option>
+					<option value="わざわいのつるぎ">わざわいのつるぎ</option>
+					<option value="わざわいのおふだ">わざわいのおふだ</option>
+					<option value="わざわいのうつわ">わざわいのうつわ</option>
+					<option value="ノーてんき">ノーてんき</option>
+					<option value="エアロック">エアロック</option>
+					<option value="タールショット">タールショット</option>
+					<option value="もりののろい">もりののろい</option>
+					<option value="はがねのせいしん">はがねのせいしん</option>
+				</select>
+			</td>
+			<td>
+				<button type="button" onclick="skuria()">クリア</button>
+			</td>
+		</tr>
+		<tr align="center">
+			<td colspan="3">
+				<input type="text" id="ssonotalist" autocomplete="off" size="80"/>
+			</td>
+		</tr>
+	</table>
+	<p style="width: 700px;margin: 0 auto;">
+		<font size="+2" face="cursive">２P</font>
+	</p>
+	<table style="width: 700px;margin: 0 auto;">
+		<tr height="30px">
+			<td width="100">
+				ポケモン名
+			</td>
+			<td width="200" id="spoketype">
+			</td>
+			<td>
+				特性：
+				<select id="stokusei">
+				</select>
+				<input type="checkbox" id="stmukou" name="stmukou"/><label for="stmukou">特性無効</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="text" id="sname" list="scodeType" autocomplete="off"/>
+				<button type="button" onclick="ssyuzokuup()">種族値セット</button>
+			</td>
+			<td><div id="stokuseisub"></div></td>
+		</tr>
+		<tr height="30px">
+			<td colspan="2"></td>
+			<td>
+				持ち物：
+				<select id="smotimono">
+				</select>
+				<a id="smetoro"></a>
+			</td>
+		</tr>
+		<tr>
+			<td id="spokelink" colspan="3"></td>
+		</tr>
+		<tr height="30px">
+			<td colspan="2">レベル：<input type="number" id="slevel" min="1" max="100" value="50"></td>
+			<td>
+				状態異常：
+				<select id="sijo">
+					<option value="通常">通常</option>
+					<option value="どく">どく</option>
+					<option value="まひ">まひ</option>
+					<option value="やけど">やけど</option>
+					<option value="ねむり">ねむり</option>
+					<option value="こおり">こおり</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+
+	<table style="width: 400px;margin: 0 auto;">
+		<tr align="center">
+			<th colspan="5">
+				ランク
+			</th>
+		</tr>
+		<tr align="center">
+			<td width="80">こうげき</td>
+			<td bgcolor="#afeeee" width="80">ぼうぎょ</td>
+			<td width="80">とくこう</td>
+			<td bgcolor="#afeeee" width="80">とくぼう</td>
+			<td width="80">すばやさ</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<select id="sr_a">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+			<td bgcolor="#afeeee">
+				<select id="sr_b">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+			<td>
+				<select id="sr_c">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+			<td bgcolor="#afeeee">
+				<select id="sr_d">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+			<td>
+				<select id="sr_s">
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option value="0" selected>0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+
+	<div class="skani" style="width: 700px;margin: 0 auto;">
+		<table style="width: 600px;margin: 0 auto;">
+			<tr align="center">
+				<td id="shukkatu"><font style="text-decoration: underline;" color="blue">耐久調整</font></td>
+				<th bgcolor="#f5deb3">HP</th>
+				<th>こうげき</th>
+				<th bgcolor="#f5deb3">ぼうぎょ</th>
+				<th>とくこう</th>
+				<th bgcolor="#f5deb3">とくぼう</th>
+			</tr>
+			<tr align="center">
+				<td width="100">努力値</td>
+				<td width="100" bgcolor="#f5deb3"><input type="number" id="sk_d_h" min="0" max="252" value="0" step="4"></td>
+				<td width="100"><input type="number" id="sk_d_a" min="0" max="252" value="0" step="4"></td>
+				<td width="100" bgcolor="#f5deb3"><input type="number" id="sk_d_b" min="0" max="252" value="0" step="4"></td>
+				<td width="100"><input type="number" id="sk_d_c" min="0" max="252" value="0" step="4"></td>
+				<td width="100" bgcolor="#f5deb3"><input type="number" id="sk_d_d" min="0" max="252" value="0" step="4"></td>
+			</tr>
+			<tr align="center">
+				<td width="100">実数値</td>
+				<td width="100" bgcolor="#f5deb3" id="sk_z_h"></td>
+				<td width="100" id="sk_z_a"></td>
+				<td width="100" bgcolor="#f5deb3" id="sk_z_b"></td>
+				<td width="100" id="sk_z_c"></td>
+				<td width="100" bgcolor="#f5deb3" id="sk_z_d"></td>
+			</tr>
+		</table>
+	</div>
+	<table style="width: 700px;margin: 0 auto;" class="styousei">
+		<tr align="center">
+			<td width="100" id="ssyouryaku"><font style="text-decoration: underline;" color="blue">省略</font></td>
+			<th width="100">種族値</th>
+			<th width="100">個体値</th>
+			<th width="100">努力値</th>
+			<th width="100">性格補正</th>
+			<th width="100">実数値</th>
+			<th width="100">その他の補正</th>
+		</tr>
+		<tr align="center" bgcolor="#afeeee">
+			<td>HP</td>
+			<td><input type="number" id="ss_h" min="1" max="999" value="1"></td>
+			<td><input type="number" id="sk_h" min="0" max="31" value="31"></td>
+			<td><input type="number" id="sd_h" min="0" max="252" value="0" step="4"></td>
+			<td></td>
+			<td><input type="number" id="sz_h" min="1" max="999" value="76"></td>
+			<td></td>
+		</tr>
+		<tr align="center">
+			<td>こうげき</td>
+			<td><input type="number" id="ss_a" min="1" max="999" value="1"></td>
+			<td><input type="number" id="sk_a" min="0" max="31" value="31"></td>
+			<td><input type="number" id="sd_a" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="sa_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="sz_a" min="1" max="999" value="21"></td>
+		</tr>
+		<tr align="center" bgcolor="#afeeee">
+			<td>ぼうぎょ</td>
+			<td><input type="number" id="ss_b" min="1" max="999" value="1"></td>
+			<td><input type="number" id="sk_b" min="0" max="31" value="31"></td>
+			<td><input type="number" id="sd_b" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="sb_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="sz_b" min="1" max="999" value="21"></td>
+			<td><input type="number" id="so_b" min="0.01" max="4" value="1" step="0.01"></td>
+		</tr>
+		<tr align="center">
+			<td>とくこう</td>
+			<td><input type="number" id="ss_c" min="1" max="999" value="1"></td>
+			<td><input type="number" id="sk_c" min="0" max="31" value="31"></td>
+			<td><input type="number" id="sd_c" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="sc_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="sz_c" min="1" max="999" value="21"></td>
+		</tr>
+		<tr align="center" bgcolor="#afeeee">
+			<td>とくぼう</td>
+			<td><input type="number" id="ss_d" min="1" max="999" value="1"></td>
+			<td><input type="number" id="sk_d" min="0" max="31" value="31"></td>
+			<td><input type="number" id="sd_d" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="sd_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="sz_d" min="1" max="999" value="21"></td>
+			<td><input type="number" id="so_d" min="0.01" max="4" value="1" step="0.01"></td>
+		</tr>
+		<tr align="center">
+			<td>すばやさ</td>
+			<td><input type="number" id="ss_s" min="1" max="999" value="1"></td>
+			<td><input type="number" id="sk_s" min="0" max="31" value="31"></td>
+			<td><input type="number" id="sd_s" min="0" max="252" value="0" step="4"></td>
+			<td>
+				<select id="ss_ch">
+					<option value="1.0">-</option>
+					<option value="1.1">up</option>
+					<option value="0.9">down</option>
+				</select>
+			</td>
+			<td><input type="number" id="sz_s" min="1" max="999" value="21"></td>
+		</tr>
+		<tr align="center" bgcolor="#afeeee">
+			<td>SUM</td>
+			<td id="ss_sum">6</td>
+			<td></td>
+			<td id="sd_sum">0</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr align="center" height="50px">
+			<td colspan="2">攻撃を受ける比率</td>
+			<td>物理</td>
+			<td colspan="2"><input type="range" id="sa_vs_c" min="0" max="100" style="width:200px"/></td>
+			<td>特殊</td>
+			<td><output id="sa_vs_c_v"></output></td>
+		</tr>
+		<tr align="center">
+			<td colspan="5">
+				<button type="button" onclick="supdateButton()" style="width:300px;height:50px">耐久調整</button>
+			</td>
+			<td colspan="2">
+				<button type="button" onclick="sresetButton()" style="height:50px">努力値リセット</button>
+			</td>
+		</tr>
+	</table>
+	<div style="width: 700px;margin: 0 auto;">
+		<table id="sresult" border="1">
+		</table>
+	</div>
+
+	<footer style="text-align: center"><font size="-1">
+		<p>
+			
+			（参照）ポケモンWiki
+			<a href="https://wiki.xn--rckteqa2e.com/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8">
+				https://wiki.xn--rckteqa2e.com/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8
+			</a>
+			
+		</p>
+		<p id="poke1"></p>
+		<p id="poke2"></p>
+		<p>
+			内容は
+			<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja">
+				帰属 - 非営利 - 継承 3.0
+			</a>
+			に準拠しています。
+		</p>
+	</font></footer>
+	<datalist id="codeType">
+		
+	</datalist>
+	<datalist id="scodeType">
+		
+	</datalist>
+	<datalist id="waza1codeType">
+		
+	</datalist>
+	<datalist id="waza2codeType">
+		
+	</datalist>
+</body>
+<script>
+	let drone= document.getElementsByName('drone');
+	let name = document.getElementById('name');
+	let level = document.getElementById('level');
+	let codeType = document.getElementById('codeType');
+	let sname = document.getElementById('sname');
+	let slevel = document.getElementById('slevel');
+	let scodeType = document.getElementById('scodeType');
+	
+	let pokelink = document.getElementById('pokelink');
+	let spokelink = document.getElementById('spokelink');
+	
+	let poketype = document.getElementById('poketype');
+	let spoketype = document.getElementById('spoketype');
+	
+	let waza1 = document.getElementById('waza1');
+	let waza2 = document.getElementById('waza2');
+	let waza1codeType = document.getElementById('waza1codeType');
+	let waza2codeType = document.getElementById('waza2codeType');
+	let waza1name = document.getElementById('waza1name');
+	let waza2name = document.getElementById('waza2name');
+	
+	let tokusei = document.getElementById('tokusei');
+	let stokusei = document.getElementById('stokusei');
+	let motimono = document.getElementById('motimono');
+	let smotimono = document.getElementById('smotimono');
+	
+	let sonota = document.getElementById('sonota');
+	let sonotalist = document.getElementById('sonotalist');
+	let ssonota = document.getElementById('ssonota');
+	let ssonotalist = document.getElementById('ssonotalist');
+	
+	let terasu = document.getElementById('terasu');
+	let sterasu = document.getElementById('sterasu');
+	
+	let ijo = document.getElementById('ijo');
+	let sijo = document.getElementById('sijo');
+	
+	var ctx = document.getElementById("myChart");
+	let kyuusyo=document.getElementById("kyuusyo");
+	var sctx = document.getElementById("smyChart");
+	let skyuusyo=document.getElementById("skyuusyo");
+	
+	let syouryaku=document.getElementById("syouryaku");
+	let hukkatu=document.getElementById("hukkatu");
+	let ssyouryaku=document.getElementById("ssyouryaku");
+	let shukkatu=document.getElementById("shukkatu");
+	
+	let s_h = document.getElementById('s_h');
+	let k_h = document.getElementById('k_h');
+	let d_h = document.getElementById('d_h');
+	let z_h = document.getElementById('z_h');
+	let ss_h = document.getElementById('ss_h');
+	let sk_h = document.getElementById('sk_h');
+	let sd_h = document.getElementById('sd_h');
+	let sz_h = document.getElementById('sz_h');
+	
+	let s_a = document.getElementById('s_a');
+	let k_a = document.getElementById('k_a');
+	let d_a = document.getElementById('d_a');
+	let z_a = document.getElementById('z_a');
+	let a_ch = document.getElementById('a_ch');
+	let ss_a = document.getElementById('ss_a');
+	let sk_a = document.getElementById('sk_a');
+	let sd_a = document.getElementById('sd_a');
+	let sz_a = document.getElementById('sz_a');
+	let sa_ch = document.getElementById('sa_ch');
+	
+	let s_b = document.getElementById('s_b');
+	let k_b = document.getElementById('k_b');
+	let d_b = document.getElementById('d_b');
+	let z_b = document.getElementById('z_b');
+	let b_ch = document.getElementById('b_ch');
+	let ss_b = document.getElementById('ss_b');
+	let sk_b = document.getElementById('sk_b');
+	let sd_b = document.getElementById('sd_b');
+	let sz_b = document.getElementById('sz_b');
+	let sb_ch = document.getElementById('sb_ch');
+	
+	let s_c = document.getElementById('s_c');
+	let k_c = document.getElementById('k_c');
+	let d_c = document.getElementById('d_c');
+	let z_c = document.getElementById('z_c');
+	let c_ch = document.getElementById('c_ch');
+	let ss_c = document.getElementById('ss_c');
+	let sk_c = document.getElementById('sk_c');
+	let sd_c = document.getElementById('sd_c');
+	let sz_c = document.getElementById('sz_c');
+	let sc_ch = document.getElementById('sc_ch');
+	
+	let s_d = document.getElementById('s_d');
+	let k_d = document.getElementById('k_d');
+	let d_d = document.getElementById('d_d');
+	let z_d = document.getElementById('z_d');
+	let d_ch = document.getElementById('d_ch');
+	let ss_d = document.getElementById('ss_d');
+	let sk_d = document.getElementById('sk_d');
+	let sd_d = document.getElementById('sd_d');
+	let sz_d = document.getElementById('sz_d');
+	let sd_ch = document.getElementById('sd_ch');
+	
+	let s_s = document.getElementById('s_s');
+	let k_s = document.getElementById('k_s');
+	let d_s = document.getElementById('d_s');
+	let z_s = document.getElementById('z_s');
+	let s_ch = document.getElementById('s_ch');
+	let ss_s = document.getElementById('ss_s');
+	let sk_s = document.getElementById('sk_s');
+	let sd_s = document.getElementById('sd_s');
+	let sz_s = document.getElementById('sz_s');
+	let ss_ch = document.getElementById('ss_ch');
+	
+	let r_a = document.getElementById('r_a');
+	let sr_a = document.getElementById('sr_a');
+	let r_b = document.getElementById('r_b');
+	let sr_b = document.getElementById('sr_b');
+	let r_c = document.getElementById('r_c');
+	let sr_c = document.getElementById('sr_c');
+	let r_d = document.getElementById('r_d');
+	let sr_d = document.getElementById('sr_d');
+	let r_s = document.getElementById('r_s');
+	let sr_s = document.getElementById('sr_s');
+	
+	let s_sum = document.getElementById('s_sum');
+	let d_sum2 = document.getElementById('d_sum');
+	let ss_sum = document.getElementById('ss_sum');
+	let sd_sum2 = document.getElementById('sd_sum');
+	
+	let result = document.getElementById('result');
+	let sresult = document.getElementById('sresult');
+	
+	let a_vs_c = document.getElementById('a_vs_c');
+	let a_vs_c_v = document.getElementById('a_vs_c_v');
+	let sa_vs_c = document.getElementById('sa_vs_c');
+	let sa_vs_c_v = document.getElementById('sa_vs_c_v');
+	
+	let o_b = document.getElementById('o_b');
+	let o_d = document.getElementById('o_d');
+	let so_b = document.getElementById('so_b');
+	let so_d = document.getElementById('so_d');
+	
+	let tenki = document.getElementById('tenki');
+	let stenki = document.getElementById('stenki');
+	let firudo = document.getElementById('firudo');
+	let sfirudo = document.getElementById('sfirudo');
+	let kabe= document.getElementById('kabe');
+	let skabe= document.getElementById('skabe');
+	
+	let tmukou= document.getElementById('tmukou');
+	let stmukou= document.getElementById('stmukou');
+	
+	let metoro= document.getElementById('metoro');
+	let smetoro= document.getElementById('smetoro');
+	var nomu;
+	var snomu;
+	
+	let subu= document.getElementById('subu');
+	var subuc;
+	let ssubu= document.getElementById('ssubu');
+	var ssubuc;
+	let tokuseisub= document.getElementById('tokuseisub');
+	var tokuseisubc;
+	let stokuseisub= document.getElementById('stokuseisub');
+	var stokuseisubc;
+	
+	let k_d_h = document.getElementById('k_d_h');
+	let k_d_a = document.getElementById('k_d_a');
+	let k_d_b = document.getElementById('k_d_b');
+	let k_d_c = document.getElementById('k_d_c');
+	let k_d_d = document.getElementById('k_d_d');
+	
+	let k_z_h = document.getElementById('k_z_h');
+	let k_z_a = document.getElementById('k_z_a');
+	let k_z_b = document.getElementById('k_z_b');
+	let k_z_c = document.getElementById('k_z_c');
+	let k_z_d = document.getElementById('k_z_d');
+	
+	let sk_d_h = document.getElementById('sk_d_h');
+	let sk_d_a = document.getElementById('sk_d_a');
+	let sk_d_b = document.getElementById('sk_d_b');
+	let sk_d_c = document.getElementById('sk_d_c');
+	let sk_d_d = document.getElementById('sk_d_d');
+	
+	let sk_z_h = document.getElementById('sk_z_h');
+	let sk_z_a = document.getElementById('sk_z_a');
+	let sk_z_b = document.getElementById('sk_z_b');
+	let sk_z_c = document.getElementById('sk_z_c');
+	let sk_z_d = document.getElementById('sk_z_d');
+	
+	var v_level;
+	var v_name;
+	
+	var v_s_h;
+	var v_k_h;
+	var v_d_h;
+	var v_z_h;
+	
+	var v_s_a;
+	var v_k_a;
+	var v_d_a;
+	var v_a_ch;
+	var v_z_a;
+	
+	var v_s_b;
+	var v_k_b;
+	var v_d_b;
+	var v_b_ch;
+	var v_z_b;
+	
+	var v_s_c;
+	var v_k_c;
+	var v_d_c;
+	var v_c_ch;
+	var v_z_c;
+	
+	var v_s_d;
+	var v_k_d;
+	var v_d_d;
+	var v_d_ch;
+	var v_z_d;
+	
+	var v_s_s;
+	var v_k_s;
+	var v_d_s;
+	var v_s_ch;
+	var v_z_s;
+	
+	var d_sum;
+	
+	var nokori;
+	var n_h;
+	var n_b;
+	var n_d;
+	var i_h_max;
+	var i_b_max;
+	var i_d_max;
+	var nokori_a;
+	var nokori_b;
+	var i_h;
+	var i_b;
+	var i_d;
+	var s1_list;
+	var s2_list;
+	var s3_list;
+	var s4_list;
+	var s5_list;
+	var s6_list;
+	var s7_list;
+	var newArr;
+	var big;
+	var j;
+	var i;
+	var n;
+	var m;
+	var elem;
+	var idx;
+	var r1_list;
+	var r2_list;
+	var r3_list;
+	var r4_list;
+	var r5_list;
+	var r6_list;
+	var r7_list;
+	var h1;
+	var h2;
+	var b1;
+	var b2;
+	var d1;
+	var d2;
+	var k1;
+	var k2;
+	var c1;
+	var c2;
+	
+	AllTokusei()
+	sAllTokusei()
+	AllWaza()
+	sAllWaza()
+	AllPokemon()
+	sAllPokemon()
+	AllMotimono()
+	sAllMotimono()
+	
+	k_d_h.value=d_h.value;
+	k_d_a.value=d_a.value;
+	k_d_b.value=d_b.value;
+	k_d_c.value=d_c.value;
+	k_d_d.value=d_d.value;
+	k_z_h.innerHTML=z_h.value;
+	k_z_a.innerHTML=z_a.value;
+	k_z_b.innerHTML=z_b.value;
+	k_z_c.innerHTML=z_c.value;
+	k_z_d.innerHTML=z_d.value;
+	
+	sk_d_h.value=sd_h.value;
+	sk_d_a.value=sd_a.value;
+	sk_d_b.value=sd_b.value;
+	sk_d_c.value=sd_c.value;
+	sk_d_d.value=sd_d.value;
+	sk_z_h.innerHTML=sz_h.value;
+	sk_z_a.innerHTML=sz_a.value;
+	sk_z_b.innerHTML=sz_b.value;
+	sk_z_c.innerHTML=sz_c.value;
+	sk_z_d.innerHTML=sz_d.value;
+	
+	level.oninput = function() {
+		Lupdate()
+	};
+	slevel.oninput = function() {
+		sLupdate()
+	};
+	
+	s_h.oninput = function() {
+		Supdate("h")
+	};
+	ss_h.oninput = function() {
+		sSupdate("h")
+	};
+
+	k_h.oninput = function() {
+		Kupdate("h")
+	};
+	sk_h.oninput = function() {
+		sKupdate("h")
+	};
+	
+	d_h.oninput = function() {
+		Dupdate("h")
+		k_d_h.value=d_h.value;
+	};
+	sd_h.oninput = function() {
+		sDupdate("h")
+		sk_d_h.value=sd_h.value;
+	};
+	k_d_h.oninput = function() {
+		d_h.value=k_d_h.value;
+		Dupdate("h")
+	};
+	sk_d_h.oninput = function() {
+		sd_h.value=sk_d_h.value;
+		sDupdate("h")
+	};
+	
+	s_a.oninput = function() {
+		Supdate("a");
+	};
+	ss_a.oninput = function() {
+		sSupdate("a");
+	};
+	
+	k_a.oninput = function() {
+		Kupdate("a")
+	};
+	sk_a.oninput = function() {
+		sKupdate("a")
+	};
+	
+	d_a.oninput = function() {
+		Dupdate("a")
+		k_d_a.value=d_a.value;
+	};
+	sd_a.oninput = function() {
+		sDupdate("a")
+		sk_d_a.value=sd_a.value;
+	};
+	k_d_a.oninput = function() {
+		d_a.value=k_d_a.value;
+		Dupdate("a")
+	};
+	sk_d_a.oninput = function() {
+		sd_a.value=sk_d_a.value;
+		sDupdate("a")
+	};
+	
+	a_ch.oninput = function() {
+		CHupdate("a")
+	};
+	sa_ch.oninput = function() {
+		sCHupdate("a")
+	};
+	
+	s_b.oninput = function() {
+		Supdate("b")
+	};
+	ss_b.oninput = function() {
+		sSupdate("b")
+	};
+	
+	k_b.oninput = function() {
+		Kupdate("b")
+	};
+	sk_b.oninput = function() {
+		sKupdate("b")
+	};
+	
+	d_b.oninput = function() {
+		Dupdate("b")
+		k_d_b.value=d_b.value;
+	};
+	sd_b.oninput = function() {
+		sDupdate("b")
+		sk_d_b.value=sd_b.value;
+	};
+	k_d_b.oninput = function() {
+		d_b.value=k_d_b.value;
+		Dupdate("b")
+	};
+	sk_d_b.oninput = function() {
+		sd_b.value=sk_d_b.value;
+		sDupdate("b")
+	};
+	
+	b_ch.oninput = function() {
+		CHupdate("b")
+	};
+	sb_ch.oninput = function() {
+		sCHupdate("b")
+	};
+	
+	s_c.oninput = function() {
+		Supdate("c")
+	};
+	ss_c.oninput = function() {
+		sSupdate("c")
+	};
+	
+	k_c.oninput = function() {
+		Kupdate("c")
+	};
+	sk_c.oninput = function() {
+		sKupdate("c")
+	};
+	
+	d_c.oninput = function() {
+		Dupdate("c")
+		k_d_c.value=d_c.value;
+	};
+	sd_c.oninput = function() {
+		sDupdate("c")
+		sk_d_c.value=sd_c.value;
+	};
+	k_d_c.oninput = function() {
+		d_c.value=k_d_c.value;
+		Dupdate("c")
+	};
+	sk_d_c.oninput = function() {
+		sd_c.value=sk_d_c.value;
+		sDupdate("c")
+	};
+	
+	c_ch.oninput = function() {
+		CHupdate("c")
+	};
+	sc_ch.oninput = function() {
+		sCHupdate("c")
+	};
+	
+	s_d.oninput = function() {
+		Supdate("d")
+	};
+	ss_d.oninput = function() {
+		sSupdate("d")
+	};
+	
+	k_d.oninput = function() {
+		Kupdate("d")
+	};
+	sk_d.oninput = function() {
+		sKupdate("d")
+	};
+	
+	d_d.oninput = function() {
+		Dupdate("d")
+		k_d_d.value=d_d.value;
+	};
+	sd_d.oninput = function() {
+		sDupdate("d")
+		sk_d_d.value=sd_d.value;
+	};
+	k_d_d.oninput = function() {
+		d_d.value=k_d_d.value;
+		Dupdate("d")
+	};
+	sk_d_d.oninput = function() {
+		sd_d.value=sk_d_d.value;
+		sDupdate("d")
+	};
+	
+	d_ch.oninput = function() {
+		CHupdate("d")
+	};
+	sd_ch.oninput = function() {
+		sCHupdate("d")
+	};
+	
+	s_s.oninput = function() {
+		Supdate("s")
+	};
+	ss_s.oninput = function() {
+		sSupdate("s")
+	};
+	
+	k_s.oninput = function() {
+		Kupdate("s")
+	};
+	sk_s.oninput = function() {
+		sKupdate("s")
+	};
+	
+	d_s.oninput = function() {
+		Dupdate("s")
+	};
+	sd_s.oninput = function() {
+		sDupdate("s")
+	};
+	
+	s_ch.oninput = function() {
+		CHupdate("s")
+	};
+	ss_ch.oninput = function() {
+		sCHupdate("s")
+	};
+	
+	a_vs_c_v.textContent = a_vs_c.value + "%";
+	a_vs_c.addEventListener("input", (event) => {
+		a_vs_c_v.textContent = event.target.value + "%";
+	});
+	
+	sa_vs_c_v.textContent = sa_vs_c.value + "%";
+	sa_vs_c.addEventListener("input", (event) => {
+		sa_vs_c_v.textContent = event.target.value + "%";
+	});
+	
+	function syuzokuup(){
+		v_name = name.value;
+		syuzoku(v_name)
+		tokusub()
+	}
+	
+	function ssyuzokuup(){
+		v_name = sname.value;
+		ssyuzoku(v_name)
+		stokusub()
+	}
+	
+	function kiero(){
+		result.innerHTML="";
+	}
+	function skiero(){
+		sresult.innerHTML="";
+	}
+	
+	waza1.oninput = function() {
+	    v_name = waza1.value;
+		W1update(v_name)
+	};
+	
+	waza2.oninput = function() {
+		v_name = waza2.value;
+		W2update(v_name)
+	};
+	
+	sonota.oninput = function() {
+		v_name=sonota.value;
+		newArr=sonotalist.value;
+		if(v_name!=""){
+			if(newArr==""){
+				sonotalist.value=v_name;
+				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
+					big=ssonotalist.value.split(",");
+					if(big.indexOf(v_name)==-1){
+						if(big[0]==""){
+							ssonotalist.value=v_name;
+						}else{
+							ssonotalist.value=ssonotalist.value+","+v_name;
+						}
+					}
+				}
+			}else{
+				big=newArr.split(",");
+				if(big.indexOf(v_name)==-1){
+					sonotalist.value=newArr+","+v_name;
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
+						big=ssonotalist.value.split(",");
+						if(big.indexOf(v_name)==-1){
+							if(big[0]==""){
+								ssonotalist.value=v_name;
+							}else{
+								ssonotalist.value=ssonotalist.value+","+v_name;
+							}
+						}
+					}
+				}else{
+					big.splice(big.indexOf(v_name), 1 );
+					newArr=big.join(",");
+					sonotalist.value=newArr;
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
+						big=ssonotalist.value.split(",");
+						if(big.indexOf(v_name)!=-1){
+							big.splice(big.indexOf(v_name), 1 );
+							newArr=big.join(",");
+							ssonotalist.value=newArr;
+						}
+					}
+				}
+			}
+			sonota.value="";
+		}
+	}
+	function kuria(){
+		sonotalist.value="";
+		dame()
+	}
+	ssonota.oninput = function() {
+		v_name=ssonota.value;
+		newArr=ssonotalist.value;
+		if(v_name!=""){
+			if(newArr==""){
+				ssonotalist.value=v_name;
+				if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
+					big=sonotalist.value.split(",");
+					if(big.indexOf(v_name)==-1){
+						if(big[0]==""){
+							sonotalist.value=v_name;
+						}else{
+							sonotalist.value=sonotalist.value+","+v_name;
+						}
+					}
+				}
+			}else{
+				big=newArr.split(",");
+				if(big.indexOf(v_name)==-1){
+					ssonotalist.value=newArr+","+v_name;
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
+						big=sonotalist.value.split(",");
+						if(big.indexOf(v_name)==-1){
+							if(big[0]==""){
+								sonotalist.value=v_name;
+							}else{
+								sonotalist.value=sonotalist.value+","+v_name;
+							}
+						}
+					}
+				}else{
+					big.splice(big.indexOf(v_name), 1 );
+					newArr=big.join(",");
+					ssonotalist.value=newArr;
+					if(v_name=="ノーてんき" || v_name=="エアロック" || v_name=="じゅうりょく" || v_name=="わざわいのたま" || v_name=="わざわいのつるぎ" || v_name=="わざわいのおふだ" || v_name=="わざわいのうつわ"){
+						big=sonotalist.value.split(",");
+						if(big.indexOf(v_name)!=-1){
+							big.splice(big.indexOf(v_name), 1 );
+							newArr=big.join(",");
+							sonotalist.value=newArr;
+						}
+					}
+				}
+			}
+			ssonota.value="";
+		}
+	}
+	function skuria(){
+		ssonotalist.value="";
+		dame()
+	}
+	
+	tenki.oninput = function() {
+		stenki.value=tenki.value;
+	}
+	stenki.oninput = function() {
+		tenki.value=stenki.value;
+	}
+	firudo.oninput = function() {
+		sfirudo.value=firudo.value;
+	}
+	sfirudo.oninput = function() {
+		firudo.value=sfirudo.value;
+	}
+	
+	teratera()
+	function teratera(){
+		v_name=name.value;
+		newArr='<option value="なし">なし</option>';
+		if(v_name=="オーガポン"){
+			newArr=newArr+'<option value="くさ">くさ</option>';
+		}else if(v_name=="オーガポン(かまどのめん)"){
+			newArr=newArr+'<option value="ほのお">ほのお</option>';
+		}else if(v_name=="オーガポン(いどのめん)"){
+			newArr=newArr+'<option value="みず">みず</option>';
+		}else if(v_name=="オーガポン(いしずえのめん)"){
+			newArr=newArr+'<option value="いわ">いわ</option>';
+		}else if(v_name=="テラパゴス(ノーマルフォルム)" || v_name=="テラパゴス(テラスタルフォルム)"){
+			newArr='<option value="なし">なし</option>';
+		}else if(v_name=="テラパゴス(ステラフォルム)"){
+			newArr='<option value="ステラ">ステラ</option>';
+		}else{
+			newArr=newArr+'<option value="ノーマル">ノーマル</option>';
+		
+			newArr=newArr+'<option value="ほのお">ほのお</option>';
+
+			newArr=newArr+'<option value="みず">みず</option>';
+
+			newArr=newArr+'<option value="でんき">でんき</option>';
+
+			newArr=newArr+'<option value="くさ">くさ</option>';
+
+			newArr=newArr+'<option value="こおり">こおり</option>';
+
+			newArr=newArr+'<option value="かくとう">かくとう</option>';
+
+			newArr=newArr+'<option value="どく">どく</option>';
+
+			newArr=newArr+'<option value="じめん">じめん</option>';
+
+			newArr=newArr+'<option value="ひこう">ひこう</option>';
+
+			newArr=newArr+'<option value="エスパー">エスパー</option>';
+
+			newArr=newArr+'<option value="むし">むし</option>';
+	
+			newArr=newArr+'<option value="いわ">いわ</option>';
+
+			newArr=newArr+'<option value="ゴースト">ゴースト</option>';
+
+			newArr=newArr+'<option value="ドラゴン">ドラゴン</option>';
+
+			newArr=newArr+'<option value="あく">あく</option>';
+
+			newArr=newArr+'<option value="はがね">はがね</option>';
+
+			newArr=newArr+'<option value="フェアリー">フェアリー</option>';
+		
+			newArr=newArr+'<option value="ステラ">ステラ</option>';
+		}
+		terasu.innerHTML=newArr;
+	}
+	
+	steratera()
+	function steratera(){
+		v_name=sname.value;
+		newArr='<option value="なし">なし</option>';
+		if(v_name=="オーガポン"){
+			newArr=newArr+'<option value="くさ">くさ</option>';
+		}else if(v_name=="オーガポン(かまどのめん)"){
+			newArr=newArr+'<option value="ほのお">ほのお</option>';
+		}else if(v_name=="オーガポン(いどのめん)"){
+			newArr=newArr+'<option value="みず">みず</option>';
+		}else if(v_name=="オーガポン(いしずえのめん)"){
+			newArr=newArr+'<option value="いわ">いわ</option>';
+		}else if(v_name=="テラパゴス(ノーマルフォルム)" || v_name=="テラパゴス(テラスタルフォルム)"){
+			newArr='<option value="なし">なし</option>';
+		}else if(v_name=="テラパゴス(ステラフォルム)"){
+			newArr='<option value="ステラ">ステラ</option>';
+		}else{
+			newArr=newArr+'<option value="ノーマル">ノーマル</option>';
+		
+			newArr=newArr+'<option value="ほのお">ほのお</option>';
+
+			newArr=newArr+'<option value="みず">みず</option>';
+
+			newArr=newArr+'<option value="でんき">でんき</option>';
+
+			newArr=newArr+'<option value="くさ">くさ</option>';
+
+			newArr=newArr+'<option value="こおり">こおり</option>';
+
+			newArr=newArr+'<option value="かくとう">かくとう</option>';
+
+			newArr=newArr+'<option value="どく">どく</option>';
+
+			newArr=newArr+'<option value="じめん">じめん</option>';
+
+			newArr=newArr+'<option value="ひこう">ひこう</option>';
+
+			newArr=newArr+'<option value="エスパー">エスパー</option>';
+
+			newArr=newArr+'<option value="むし">むし</option>';
+	
+			newArr=newArr+'<option value="いわ">いわ</option>';
+
+			newArr=newArr+'<option value="ゴースト">ゴースト</option>';
+
+			newArr=newArr+'<option value="ドラゴン">ドラゴン</option>';
+
+			newArr=newArr+'<option value="あく">あく</option>';
+
+			newArr=newArr+'<option value="はがね">はがね</option>';
+
+			newArr=newArr+'<option value="フェアリー">フェアリー</option>';
+		
+			newArr=newArr+'<option value="ステラ">ステラ</option>';
+		}
+		sterasu.innerHTML=newArr;
+	}
+	
+	var kakutei=0;
+	var ransuu=0;
+	var dametai="";
+	var myChartSt = new Chart(ctx, {
+    	type: "horizontalBar",
+    	data:{
+    		labels: ['ダメージ結果',],
+    		datasets: [
+    			{
+    				label: '確定',
+    				data: [kakutei,],
+    				backgroundColor: "rgba(219,39,91,0.5)"
+    			},
+    			{
+    				label: '乱数',
+    				data: [ransuu,],
+    				backgroundColor: "rgba(130,201,169,0.5)"
+    			}
+    		]
+    	},
+    	options: {
+    		title: {
+    			display: true,
+    			text: dametai
+    		},
+    		scales: {
+    			xAxes: [
+    				{
+    					stacked: true,
+    					ticks:{
+							beginAtZero:true,//0からスタート
+							suggestedMax: 100,//最大が100
+							suggestedMin: 0,//最小が0
+							callback: function(value){
+								return  value +  '%'
+							}
+						}
+					}
+				],
+				yAxes: [
+					{
+						stacked: true
+					}
+				]
+			},
+			legend: {
+				display: false
+			},
+			tooltips: {
+				enabled: false
+			},
+			responsive: true,
+
+			maintainAspectRatio: false
+    	}
+    });
+    
+    var smyChartSt = new Chart(sctx, {
+    	type: "horizontalBar",
+    	data:{
+    		labels: ['ダメージ結果',],
+    		datasets: [
+    			{
+    				label: '確定',
+    				data: [kakutei,],
+    				backgroundColor: "rgba(219,39,91,0.5)"
+    			},
+    			{
+    				label: '乱数',
+    				data: [ransuu,],
+    				backgroundColor: "rgba(130,201,169,0.5)"
+    			}
+    		]
+    	},
+    	options: {
+    		title: {
+    			display: true,
+    			text: dametai
+    		},
+    		scales: {
+    			xAxes: [
+    				{
+    					stacked: true,
+    					ticks:{
+							beginAtZero:true,//0からスタート
+							suggestedMax: 100,//最大が100
+							suggestedMin: 0,//最小が0
+							callback: function(value){
+								return  value +  '%'
+							}
+						}
+					}
+				],
+				yAxes: [
+					{
+						stacked: true
+					}
+				]
+			},
+			legend: {
+				display: false
+			},
+			tooltips: {
+				enabled: false
+			},
+			responsive: true,
+
+			maintainAspectRatio: false
+    	}
+    });
+    
+    window.addEventListener("input",function(){
+		v_name = waza1.value;
+		W1update(v_name)
+		v_name = waza2.value;
+		W2update(v_name)
+    	dame()
+    });
+    
+    tokusei.oninput = function() {
+    	setTokusei()
+    	tokusub()
+    };
+    stokusei.oninput = function() {
+    	ssetTokusei()
+    	stokusub()
+    };
+    
+    function showPopup(){
+    	if(document.querySelector(".popup").style.display == "block"){
+    		document.querySelector(".popup").style.display = "none";
+    	}else{
+    		document.querySelector(".popup").style.display = "block";
+    	}
+    }
+    function sshowPopup(){
+    	if(document.querySelector(".spopup").style.display == "block"){
+    		document.querySelector(".spopup").style.display = "none";
+    	}else{
+    		document.querySelector(".spopup").style.display = "block";
+    	}
+    }
+    
+    motimono.oninput = function() {
+    	metorof()
+    }
+    smotimono.oninput = function() {
+    	smetorof()
+    }
+    
+    syouryaku.addEventListener('click', (e) => {
+		document.querySelector(".tyousei").style.display = "none";
+		document.querySelector(".kani").style.display = "block";
+    })
+    ssyouryaku.addEventListener('click', (e) => {
+		document.querySelector(".styousei").style.display = "none";
+		document.querySelector(".skani").style.display = "block";
+    })
+    hukkatu.addEventListener('click', (e) => {
+		document.querySelector(".kani").style.display = "none";
+		document.querySelector(".tyousei").style.display = "block";
+	})
+	shukkatu.addEventListener('click', (e) => {
+		document.querySelector(".skani").style.display = "none";
+		document.querySelector(".styousei").style.display = "block";
+	})
+</script>
+</html>
