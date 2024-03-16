@@ -1,0 +1,15 @@
+{
+	"manifest_version": 2,
+	"name": "ポケ耐",
+	"description": "ポケモン耐久調整ツール",
+	"version": "0.01",
+	"browser_action": {
+		"default_title": "ポケ耐",
+		"default_popup": "setting.html"
+	},
+	"icons": {
+		"16": "16.png",
+		"48": "48.png",
+		"128": "128.png"
+	}
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>ポケ耐</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td style="width:70px">ポケモン名</td>
+				<td style="width:250px">
+					<input type="text" id="name" list="codeType" autocomplete="off" style="width:200px">
+				</td>
+				<td>
+					<input type="button" value="耐久調整" id="poketai" style="width:100px">
+				</td>
+			</tr>
+			<tr>
+				<td>レベル</td>
+				<td>
+					<input type="number" id="level" min="1" max="100" value="50">
+				</td>
+				<td>
+					<input type="button" value="リセット" id="reset" style="width:100px">
+				</td>
+			</tr>
+		</table>
+		<table style="width:420px">
+			<tr align="center">
+				<td style="width:60px"></td>
+				<td style="width:60px">種</td>
+				<td style="width:60px">個</td>
+				<td style="width:60px">努</td>
+				<td style="width:60px">実</td>
+				<td style="width:60px">性格</td>
+				<td style="width:60px">他</td>
+			</tr>
+			<tr style="background-color:#66cdaa" align="center">
+				<td>HP</td>
+				<td id="h_s">-</td>
+				<td><input type="number" id="h_k" min="0" max="31" value="31" style="width:40px"></td>
+				<td><input type="number" id="h_d" min="0" max="252" value="0" step="4" style="width:40px"></td>
+				<td id="h_z">-</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr align="center">
+				<td>攻撃</td>
+				<td id="a_s">-</td>
+				<td>
+					<input type="number" id="a_k" min="0" max="31" value="31" style="width:40px">
+				</td>
+				<td>
+					<input type="number" id="a_d" min="0" max="252" value="0" step="4" style="width:40px">
+				</td>
+				<td id="a_z">-</td>
+				<td>
+					<select id="a_ch" style="width:50px">
+						<option value="1">-</option>
+						<option value="1.1">up</option>
+						<option value="0.9">down</option>
+					</select>
+				</td>
+				<td></td>
+			</tr>
+			<tr style="background-color:#66cdaa" align="center">
+				<td>防御</td>
+				<td id="b_s">-</td>
+				<td>
+					<input type="number" id="b_k" min="0" max="31" value="31" style="width:40px">
+				</td>
+				<td><input type="number" id="b_d" min="0" max="252" value="0" step="4" style="width:40px"></td>
+				<td id="b_z">-</td>
+				<td>
+					<select id="b_ch" style="width:50px">
+						<option value="1">-</option>
+						<option value="1.1">up</option>
+						<option value="0.9">down</option>
+					</select>
+				</td>
+				<td>
+					<input type="number" id="b_o" min="0.01" max="4" value="1" step="0.01" style="width:40px">
+				</td>
+			</tr>
+			<tr align="center">
+				<td>特攻</td>
+				<td id="c_s">-</td>
+				<td>
+					<input type="number" id="c_k" min="0" max="31" value="31" style="width:40px">
+				</td>
+				<td>
+					<input type="number" id="c_d" min="0" max="252" value="0" step="4" style="width:40px">
+				</td>
+				<td id="c_z">-</td>
+				<td>
+					<select id="c_ch" style="width:50px">
+						<option value="1">-</option>
+						<option value="1.1">up</option>
+						<option value="0.9">down</option>
+					</select>
+				</td>
+				<td></td>
+			</tr>
+			<tr style="background-color:#66cdaa" align="center">
+				<td>特防</td>
+				<td id="d_s">-</td>
+				<td>
+					<input type="number" id="d_k" min="0" max="31" value="31" style="width:40px">
+				</td>
+				<td><input type="number" id="d_d" min="0" max="252" value="0" step="4" style="width:40px"></td>
+				<td id="d_z">-</td>
+				<td>
+					<select id="d_ch" style="width:50px">
+						<option value="1">-</option>
+						<option value="1.1">up</option>
+						<option value="0.9">down</option>
+					</select>
+				</td>
+				<td>
+					<input type="number" id="d_o" min="0.01" max="4" value="1" step="0.01" style="width:40px">
+				</td>
+			</tr>
+			<tr align="center">
+				<td>素早さ</td>
+				<td id="s_s">-</td>
+				<td>
+					<input type="number" id="s_k" min="0" max="31" value="31" style="width:40px">
+				</td>
+				<td>
+					<input type="number" id="s_d" min="0" max="252" value="0" step="4" style="width:40px">
+				</td>
+				<td id="s_z">-</td>
+				<td>
+					<select id="s_ch" style="width:50px">
+						<option value="1">-</option>
+						<option value="1.1">up</option>
+						<option value="0.9">down</option>
+					</select>
+				</td>
+				<td></td>
+			</tr>
+			<tr style="background-color:#66cdaa" align="center">
+				<td>合計</td>
+				<td id="sum1">-</td>
+				<td></td>
+				<td id="sum2">0</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr align="center">
+				<td colspan="2">攻撃を受ける比率</td>
+				<td>物理</td>
+				<td colspan="2"><input type="range" id="a_vs_c" min="0" max="100" style="width:120px"></td>
+				<td>特殊</td>
+				<td><output id="a_vs_c_value"></output></td>
+			</tr>
+		</table>
+		<div class="result">
+			<table style="width:420px">
+				<tr>
+					<th style="width:320px">結果</th>
+					<th style="width:100px">
+						<input type="button" value="結果消去" id="del" style="width:100px">
+					</th>
+				</tr>
+			</table>
+			<table id="result" style="width:420px" border="1">
+			</table>
+		</div>
+		<footer style="text-align: center">
+			<p>（参照）<a href="https://wiki.xn--rckteqa2e.com/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8" target="_blank" rel="noopener noreferrer">ポケモンWiki</a></p>
+			<p>内容は<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja" target="_blank" rel="noopener noreferrer">帰属 - 非営利 - 継承 3.0</a>に準拠しています。</p>
+		</footer>
+		<datalist id="codeType">
+		</datalist>
+		<script src="poketai.js"></script>
+		<style>
+			.result{
+				display: none;
+			}
+		</style>
+	</body>
+</html>
